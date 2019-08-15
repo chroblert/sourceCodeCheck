@@ -1,4 +1,5 @@
 gaiaworks
+gaiaworkforce
 GAIA.HRONE
 Gaia.Schedule
 gaiaworks.gaiaonehandle
@@ -6,4 +7,3 @@ GaiaWorks.SPM
 com.gaiaworks
 com.gaia.cloud
 com.gaia.cloud.arithmetic
-gaiaworkforce

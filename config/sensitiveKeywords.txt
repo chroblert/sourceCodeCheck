@@ -7,5 +7,4 @@ admin
 gaiaworkforce
 gaiaworks
 gaia
-sa
 administrator

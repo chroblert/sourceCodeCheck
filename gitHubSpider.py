@@ -411,10 +411,10 @@ if __name__ == '__main__':
         os.makedirs(scanResultDir)
     overallScanResultUri = scanResultDir + '/' + 'scanResult.txt'
     # 一些重要文件
-    gaiaKeywordListUri = 'gaiaKeywords.txt'
-    gaiaIPListUri = 'gaiaIP.txt'
-    gaiaDomainListUri = 'gaiaDomain.txt'
-    sensitiveKeywordListUri = 'sensitiveKeywords.txt'
+    gaiaKeywordListUri = './config/gaiaKeywords.txt'
+    gaiaIPListUri = './config/gaiaIP.txt'
+    gaiaDomainListUri = './config/gaiaDomain.txt'
+    sensitiveKeywordListUri = './config/sensitiveKeywords.txt'
     # 1. 拿到用于保持登录状态的cookie
     cookie = get_cookie_from_github(refreshCookie=False)
     # print(cookie)
