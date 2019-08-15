@@ -421,7 +421,7 @@ if __name__ == '__main__':
     # print(cookie)
     # 2. 拿到包含所有关键词的所有用户名/项目名
     allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
-    # save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
+    save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
     #print(allUserProjectList)
     # 3. 将格式为用户名/项目名的字符串进行处理，存储为字典格式,并保存到json文件中
     # allUserProjectListUri = "allUserProjectList.txt"
@@ -433,11 +433,11 @@ if __name__ == '__main__':
     # allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
     # print("保存成文件")
     # save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
-    allUserItemListUri = 'allUserItemList.json'
+    # allUserItemListUri = 'allUserItemList.json'
     # 5. 读取文件中的数据
-    allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
+    # allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
     # print(allUserItemList)
-    get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
+    # get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
     
 
 

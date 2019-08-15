@@ -5,10 +5,13 @@ import re
 from lxml import etree
 from tool import read_txt_file_to_list
 
-with open('tttttt.html','r',encoding = 'utf-8') as f:
+with open('ttttt.html','a',encoding = 'utf-8') as f:
+    f.write('盖雅放假啊')
+    f.write('\n')
+with open('ttttt.html','r',encoding = 'utf-8') as f:
     fileHtml = f.read()
 
-sensitiveKeywordListUri = 'sensitiveKeywords.txt'
+sensitiveKeywordListUri = './config/sensitiveKeywords.txt'
 sensitiveKeywordList = read_txt_file_to_list(sensitiveKeywordListUri)
 print(sensitiveKeywordList)
 isHaveSensitiveKeyword = True
