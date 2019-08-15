@@ -250,7 +250,8 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
         # print(allIPList)
         save_List_to_file(allIPList,'allIPList.txt')
         # 求出gaiaIPList与allIPList的交集
-        retIPList = list(set(allIPList).intersection(set(gaiaIPList)))
+        # retIPList = list(set(allIPList).intersection(set(gaiaIPList)))
+        retIPList = [i for i in allIPList if i in list(set(gaiaIPList)) ]
         # 通过交集IPlist的len() 来判断该文件内容中是否有公司的服务器IP
         isHaveGaiaIP = True
         if len(retIPList) == 0:
@@ -259,15 +260,15 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
         else:
             fileWeight = fileWeight + len(retIPList)
             print("包含的公司IP如下：")
-            print(retIPList)
+            print(list(set(retIPList)))
         # print(allIP)
         # 3. 提取出响应内容的所有域名url
         # allDomainUrlList = list(set(re.findall(r'\b(https?:\/\/.*\.?com|cn|org|edu)\b',fileHtml)))
         # allDomainUrlList = list(set(re.findall(r'(http|https)://(\w+\.){1,3}\w+',fileHtml)))
-        allDomainUrlList = list(set(re.findall(r'\b((?:http|https)://(?:\w+\.){1,}\w+)\b',fileHtml)))
+        allDomainUrlList = re.findall(r'\b((?:http|https)://(?:\w+\.){1,}\w+)\b',fileHtml)
         # print("该文件内包含的域名如下：")
         # print(allDomainUrlList)
-        save_List_to_file(allDomainUrlList,'allDomainUrlList.txt')
+        save_List_to_file(list(set(allDomainUrlList)),'allDomainUrlList.txt')
         # 求出allDomainUrlList中的url包含gaia关键字的url的list
         retDomainList = [i for i in allDomainUrlList if 'gaia' in i]
         # 通过交集domainList的len()来判断该文件内容中是否有公司的domain
@@ -278,7 +279,7 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
         else:
             fileWeight = fileWeight + len(retDomainList)
             print("包含的公司域名如下：")
-            print(retDomainList)
+            print(list(set(retDomainList)))
         # 4. 检索该文件内是否有一些敏感信息词汇
         isHaveSensitiveKeyword = True
         havedSensitiveKeywordList = []
@@ -301,7 +302,7 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
         retIPList = []
         retDomainList = []
         havedSensitiveKeywordList = []
-    return fileWeight,fileHtml,retIPList,retDomainList,list(set(havedSensitiveKeywordList))
+    return fileWeight,fileHtml,list(set(retIPList)),list(set(retDomainList)),list(set(havedSensitiveKeywordList))
     # 4. 响应内容中是否包含普通敏感关键词
 
 def get_sensitive_info_for_one_file(fullDir,fileLink,cookie = {}):
@@ -420,25 +421,22 @@ if __name__ == '__main__':
     cookie = get_cookie_from_github(refreshCookie=False)
     # print(cookie)
     # 2. 拿到包含所有关键词的所有用户名/项目名
-    allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
-    save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
+    # allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
+    # save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
     #print(allUserProjectList)
     # 3. 将格式为用户名/项目名的字符串进行处理，存储为字典格式,并保存到json文件中
-    # allUserProjectListUri = "allUserProjectList.txt"
-    # userProjectDict = file_data_process(allUserProjectListUri)
-    # save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
+    allUserProjectListUri = "allUserProjectList.txt"
+    userProjectDict = file_data_process(allUserProjectListUri)
+    save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
     # 4. 在某用户的某个仓库中搜索关键词，得到仓库中所有包含该关键词的文件链接，并将结果保存到json文件中
-    # allUserProjectDictUri = 'allUserProjectDict.json'
-    # allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
-    # allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
-    # print("保存成文件")
-    # save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
-    # allUserItemListUri = 'allUserItemList.json'
+    allUserProjectDictUri = 'allUserProjectDict.json'
+    allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
+    allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
+    print("保存成文件")
+    save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
+    allUserItemListUri = 'allUserItemList.json'
     # 5. 读取文件中的数据
-    # allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
-    # print(allUserItemList)
-    # get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
+    allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
+    print(allUserItemList)
+    get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
     
-
-
-
