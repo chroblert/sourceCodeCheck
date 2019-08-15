@@ -1,2 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-shengqi158|#|wooyun_gitinfoleak_scan|#|wooyun_factory_list-640315d56e3226260c9a2d3d46b11f99.html|#|48|#|admin , gaiaworks , gaia , sa|#||#|

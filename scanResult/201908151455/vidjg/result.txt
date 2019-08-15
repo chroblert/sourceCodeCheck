@@ -1,2 +1,0 @@
-userName|#|projectName|#|userProjectWeight
-vidjg|#|empea_orbis_mapping|#|459

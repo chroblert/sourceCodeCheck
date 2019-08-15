@@ -1,2 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-StefanMallia|#|Data-Science_Trump-Twitter-Data|#|StefanMallia-Data-Science_Trump-Twitter-Data-blob-58f4227032de6c79f72719beb68fbafe0a5652ad-followers-cursor_1587147825929927703.txt.html|#|1|#|gaiaworkforce|#||#|

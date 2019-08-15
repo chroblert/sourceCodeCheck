@@ -1,2 +1,0 @@
-userName|#|userWeight
-aladingdeng|#|1

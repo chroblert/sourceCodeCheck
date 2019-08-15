@@ -1,2 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-Greyh4t|#|wooyun|#|wooyun_factory_list-69c787928d44518091e903df9e6cc13d.html|#|48|#|admin , gaiaworks , gaia , sa|#||#|

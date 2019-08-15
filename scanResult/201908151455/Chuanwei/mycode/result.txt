@@ -1,3 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-Chuanwei|#|mycode|#|target201808.txt-ae05d7cd3786e58b60b4e4c6217446b1.html|#|57|#|admin , gaiaworks , gaia , sa|#||#|
-Chuanwei|#|mycode|#|butian.txt-3106ddab48b0abcab38826b15bcb7710.html|#|55|#|admin , gaiaworks , gaia , sa|#||#|

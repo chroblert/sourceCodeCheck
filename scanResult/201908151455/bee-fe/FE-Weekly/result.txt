@@ -1,2 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-bee-fe|#|FE-Weekly|#|20190730.html-22c1c7c50eb70a26b495b5b48dfcfdd7.html|#|3|#|gaiaworks , gaia|#|http://wiki.gaiaworks.cn|#|

@@ -1,2 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-lisaljy|#|UESTC-FinalProject|#|unprocessed.txt-0bd6fe14cd5283ee59a1da17b66284ee.html|#|4|#|sa|#||#|

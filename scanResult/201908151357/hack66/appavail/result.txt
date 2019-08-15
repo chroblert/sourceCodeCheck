@@ -1,5 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-hack66|#|appavail|#|hack66-appavail-blob-2af131d030a9e5d03cd546e04a034841090255c2-itunes-itunes_%E8%A7%84%E9%81%BF_sg.json.html|#|2|#|gaiaworkforce , gaiaworkforce|#||#|
-hack66|#|appavail|#|hack66-appavail-blob-2af131d030a9e5d03cd546e04a034841090255c2-itunes-itunes_%E8%A7%84%E9%81%BF_cn.json.html|#|2|#|gaiaworkforce , gaiaworkforce|#||#|
-hack66|#|appavail|#|hack66-appavail-blob-2af131d030a9e5d03cd546e04a034841090255c2-gplay-gplay_%E8%A7%84%E9%81%BF_mc.json.html|#|2|#|gaiaworkforce , gaiaworkforce|#||#|
-hack66|#|appavail|#|hack66-appavail-blob-2af131d030a9e5d03cd546e04a034841090255c2-gplay-gplay_%E8%A7%84%E9%81%BF_gl.json.html|#|2|#|gaiaworkforce , gaiaworkforce|#||#|

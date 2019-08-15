@@ -1,2 +1,0 @@
-userName|#|projectName|#|userProjectWeight
-bee-fe|#|FE-Weekly|#|1

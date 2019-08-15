@@ -1,2 +1,0 @@
-userName|#|projectName|#|userProjectWeight
-shengqi158|#|wooyun_gitinfoleak_scan|#|48

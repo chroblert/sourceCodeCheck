@@ -1,2 +1,0 @@
-userName|#|userWeight
-bee-fe|#|1

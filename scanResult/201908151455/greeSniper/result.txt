@@ -1,3 +1,0 @@
-userName|#|projectName|#|userProjectWeight
-greeSniper|#|weather|#|147
-greeSniper|#|storm|#|217

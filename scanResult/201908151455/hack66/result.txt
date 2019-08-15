@@ -1,2 +1,0 @@
-userName|#|projectName|#|userProjectWeight
-hack66|#|appavail|#|66

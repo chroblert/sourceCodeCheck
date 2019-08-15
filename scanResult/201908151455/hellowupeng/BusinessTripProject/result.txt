@@ -1,2 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-hellowupeng|#|BusinessTripProject|#|project.pbxproj-61125d3a2db45fc0e2a40806785e9648.html|#|103|#|gaiaworks , gaia , sa , root|#||#|

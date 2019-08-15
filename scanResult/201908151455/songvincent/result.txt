@@ -1,2 +1,0 @@
-userName|#|projectName|#|userProjectWeight
-songvincent|#|CloudGame|#|12

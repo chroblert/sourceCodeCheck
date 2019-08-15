@@ -1,2 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-aladingdeng|#|butian|#|demo.txt-5759b9b43ad25b7effb706d6cbdf945a.html|#|35|#|gaiaworks , gaia , sa , root|#|http://www.gaiaworks.cn|#|

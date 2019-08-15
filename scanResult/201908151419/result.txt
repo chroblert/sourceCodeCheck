@@ -1,5 +1,0 @@
-userName|#|userWeight
-bee-fe|#|1
-maybe-why-not|#|1
-aladingdeng|#|1
-jibp|#|1

@@ -1,3 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-edwardmeng|#|MassActivation|#|UpgradeLog.htm-a1aee7bb71bc8d0eae31aa52c095017a.html|#|47|#|sa|#||#|
-edwardmeng|#|MassActivation|#|0001-Add-API-to-exclude-startup-types.patch-1dae0114780d0b91bea7d26c5ac07b44.html|#|8|#|gaiaworks , gaia , sa , root|#||#|

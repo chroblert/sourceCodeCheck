@@ -1,3 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-wnls|#|224w_vc_net|#|Matrix%20Partners%20China.csv-e5c6e6fdc64362080bab0d759abd7312.html|#|18|#|gaiaworks , gaia , sa , root|#||#|
-wnls|#|224w_vc_net|#|startup_list.txt-722255929716c646e26323e6addcef11.html|#|28|#|sa|#||#|

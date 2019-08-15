@@ -1,2 +1,0 @@
-userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
-hellowupeng|#|RayWenderlich|#|ThreeRingControl.podspec-f2b93d6c9915c502b9653d1c4002d2a0.html|#|2|#|gaiaworks , gaia|#||#|
