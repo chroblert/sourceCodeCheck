@@ -403,7 +403,7 @@ def get_all_user_project_with_all_keyword(uri = 'gaiaKeywords.txt',cookie = {}):
     for gaiaKeyword in gaiaKeywordList:
         # 将list转为set再转为list是为了去掉初始list中的重复数据
         allUserProjectList.extend(list(set(get_all_user_project_with_keyword(keyword = gaiaKeyword,cookie = cookie))))
-    return deepcopy(allUserProjectList)
+    return deepcopy(list(set(allUserProjectList)))
 
 if __name__ == '__main__':
     scanTimeAsDir = time.strftime('%Y%m%d%H%M',time.localtime(time.time()))
