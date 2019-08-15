@@ -1,0 +1,2 @@
+userName|#|projectName|#|userProjectWeight
+StefanMallia|#|Data-Science_Trump-Twitter-Data|#|1

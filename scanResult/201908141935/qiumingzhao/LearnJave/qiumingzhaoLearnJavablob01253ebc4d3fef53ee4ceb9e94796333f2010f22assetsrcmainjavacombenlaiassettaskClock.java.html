@@ -1,0 +1,285 @@
+<table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tr>
+        <td id="L1" class="blob-num js-line-number" data-line-number="1"/>
+        <td id="LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">package</span> <span class="pl-smi">com.benlai.asset.task</span>;</td>
+      </tr>
+      <tr>
+        <td id="L2" class="blob-num js-line-number" data-line-number="2"/>
+        <td id="LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L3" class="blob-num js-line-number" data-line-number="3"/>
+        <td id="LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">com.alibaba.fastjson.JSON</span>;</td>
+      </tr>
+      <tr>
+        <td id="L4" class="blob-num js-line-number" data-line-number="4"/>
+        <td id="LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">com.benlai.asset.model.clock.ClockResponse</span>;</td>
+      </tr>
+      <tr>
+        <td id="L5" class="blob-num js-line-number" data-line-number="5"/>
+        <td id="LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">com.benlai.asset.model.clock.LoginResponse</span>;</td>
+      </tr>
+      <tr>
+        <td id="L6" class="blob-num js-line-number" data-line-number="6"/>
+        <td id="LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">com.benlai.asset.utils.HttpUtils</span>;</td>
+      </tr>
+      <tr>
+        <td id="L7" class="blob-num js-line-number" data-line-number="7"/>
+        <td id="LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.slf4j.Logger</span>;</td>
+      </tr>
+      <tr>
+        <td id="L8" class="blob-num js-line-number" data-line-number="8"/>
+        <td id="LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.slf4j.LoggerFactory</span>;</td>
+      </tr>
+      <tr>
+        <td id="L9" class="blob-num js-line-number" data-line-number="9"/>
+        <td id="LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.springframework.scheduling.annotation.Scheduled</span>;</td>
+      </tr>
+      <tr>
+        <td id="L10" class="blob-num js-line-number" data-line-number="10"/>
+        <td id="LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.springframework.stereotype.Component</span>;</td>
+      </tr>
+      <tr>
+        <td id="L11" class="blob-num js-line-number" data-line-number="11"/>
+        <td id="LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">sun.net.www.http.HttpClient</span>;</td>
+      </tr>
+      <tr>
+        <td id="L12" class="blob-num js-line-number" data-line-number="12"/>
+        <td id="LC12" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L13" class="blob-num js-line-number" data-line-number="13"/>
+        <td id="LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.text.SimpleDateFormat</span>;</td>
+      </tr>
+      <tr>
+        <td id="L14" class="blob-num js-line-number" data-line-number="14"/>
+        <td id="LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.util.Date</span>;</td>
+      </tr>
+      <tr>
+        <td id="L15" class="blob-num js-line-number" data-line-number="15"/>
+        <td id="LC15" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L16" class="blob-num js-line-number" data-line-number="16"/>
+        <td id="LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-k">@Component</span></td>
+      </tr>
+      <tr>
+        <td id="L17" class="blob-num js-line-number" data-line-number="17"/>
+        <td id="LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">Clock</span> {</td>
+      </tr>
+      <tr>
+        <td id="L18" class="blob-num js-line-number" data-line-number="18"/>
+        <td id="LC18" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-smi">String</span> updateTime;</td>
+      </tr>
+      <tr>
+        <td id="L19" class="blob-num js-line-number" data-line-number="19"/>
+        <td id="LC19" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-smi">Logger</span> logger <span class="pl-k">=</span> <span class="pl-smi">LoggerFactory</span><span class="pl-k">.</span>getLogger(<span class="pl-smi">Clock</span><span class="pl-k">.</span>class);</td>
+      </tr>
+      <tr>
+        <td id="L20" class="blob-num js-line-number" data-line-number="20"/>
+        <td id="LC20" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L21" class="blob-num js-line-number" data-line-number="21"/>
+        <td id="LC21" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">@Scheduled</span>(<span class="pl-c1">cron</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>0 40 8,18 * * ? <span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="L22" class="blob-num js-line-number" data-line-number="22"/>
+        <td id="LC22" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">task</span>() {</td>
+      </tr>
+      <tr>
+        <td id="L23" class="blob-num js-line-number" data-line-number="23"/>
+        <td id="LC23" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">try</span> {</td>
+      </tr>
+      <tr>
+        <td id="L24" class="blob-num js-line-number" data-line-number="24"/>
+        <td id="LC24" class="blob-code blob-code-inner js-file-line">            logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"</span>&#24320;&#22987;&#36827;&#34892;&#25171;&#21345;<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L25" class="blob-num js-line-number" data-line-number="25"/>
+        <td id="LC25" class="blob-code blob-code-inner js-file-line">            <span class="pl-smi">String</span> toolData <span class="pl-k">=</span> <span class="pl-smi">HttpUtils</span><span class="pl-k">.</span>doGet(<span class="pl-s"><span class="pl-pds">"</span>https://tool.bitefu.net/jiari/?d=<span class="pl-pds">"</span></span> <span class="pl-k">+</span> getDate(), <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L26" class="blob-num js-line-number" data-line-number="26"/>
+        <td id="LC26" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">if</span> (toolData<span class="pl-k">.</span>trim()<span class="pl-k">.</span>equals(<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>)) {</td>
+      </tr>
+      <tr>
+        <td id="L27" class="blob-num js-line-number" data-line-number="27"/>
+        <td id="LC27" class="blob-code blob-code-inner js-file-line">                <span class="pl-k">int</span> random <span class="pl-k">=</span> (<span class="pl-k">int</span>) (<span class="pl-smi">Math</span><span class="pl-k">.</span>random() <span class="pl-k">*</span> <span class="pl-c1">5</span> <span class="pl-k">*</span> <span class="pl-c1">60</span> <span class="pl-k">*</span> <span class="pl-c1">1000</span>);</td>
+      </tr>
+      <tr>
+        <td id="L28" class="blob-num js-line-number" data-line-number="28"/>
+        <td id="LC28" class="blob-code blob-code-inner js-file-line">                <span class="pl-smi">Thread</span><span class="pl-k">.</span>sleep(random);</td>
+      </tr>
+      <tr>
+        <td id="L29" class="blob-num js-line-number" data-line-number="29"/>
+        <td id="LC29" class="blob-code blob-code-inner js-file-line">                clock();</td>
+      </tr>
+      <tr>
+        <td id="L30" class="blob-num js-line-number" data-line-number="30"/>
+        <td id="LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L31" class="blob-num js-line-number" data-line-number="31"/>
+        <td id="LC31" class="blob-code blob-code-inner js-file-line">            }</td>
+      </tr>
+      <tr>
+        <td id="L32" class="blob-num js-line-number" data-line-number="32"/>
+        <td id="LC32" class="blob-code blob-code-inner js-file-line">            logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"</span>&#25171;&#21345;&#23436;&#27605;<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L33" class="blob-num js-line-number" data-line-number="33"/>
+        <td id="LC33" class="blob-code blob-code-inner js-file-line">        } <span class="pl-k">catch</span> (<span class="pl-smi">Exception</span> e) {</td>
+      </tr>
+      <tr>
+        <td id="L34" class="blob-num js-line-number" data-line-number="34"/>
+        <td id="LC34" class="blob-code blob-code-inner js-file-line">            logger<span class="pl-k">.</span>error(<span class="pl-s"><span class="pl-pds">"</span>&#25171;&#21345;&#22833;&#36133;:<span class="pl-pds">"</span></span> <span class="pl-k">+</span> e<span class="pl-k">.</span>getMessage());</td>
+      </tr>
+      <tr>
+        <td id="L35" class="blob-num js-line-number" data-line-number="35"/>
+        <td id="LC35" class="blob-code blob-code-inner js-file-line">        }</td>
+      </tr>
+      <tr>
+        <td id="L36" class="blob-num js-line-number" data-line-number="36"/>
+        <td id="LC36" class="blob-code blob-code-inner js-file-line">    }</td>
+      </tr>
+      <tr>
+        <td id="L37" class="blob-num js-line-number" data-line-number="37"/>
+        <td id="LC37" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L38" class="blob-num js-line-number" data-line-number="38"/>
+        <td id="LC38" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">clock</span>() {</td>
+      </tr>
+      <tr>
+        <td id="L39" class="blob-num js-line-number" data-line-number="39"/>
+        <td id="LC39" class="blob-code blob-code-inner js-file-line">        logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"</span>&#24320;&#22987;&#25191;&#34892;&#25171;&#21345;<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L40" class="blob-num js-line-number" data-line-number="40"/>
+        <td id="LC40" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">String</span> data <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>{<span class="pl-cce">\"</span>mobileId<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>f05fac98<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>phoneOnly<span class="pl-cce">\"</span>:2,<span class="pl-cce">\"</span>ignorePhoneChange<span class="pl-cce">\"</span>:1,<span class="pl-cce">\"</span>isNeedReason<span class="pl-cce">\"</span>:0,<span class="pl-cce">\"</span>loginName<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>Zc0L9Zt1pZ72WbvqaX+ckA==<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>password<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>QG8ccgAa4GjbMSPiXYZQlg==<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>simId<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>E58FF32FE2EA80E8C12EF878F509C393|8F92200B3EE0BBE5BC5F7168BFA60694<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>phoneModel<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>OPPO OPPO R11<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>phoneSysVersion<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>7.1.1<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>appVersion<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>4.1.2.1<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>language<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>ZH-CN<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>isClearGesturePwd<span class="pl-cce">\"</span>:0,<span class="pl-cce">\"</span>companyCode<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>benlai<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>Accid<span class="pl-cce">\"</span>:<span class="pl-cce">\"\"</span>,<span class="pl-cce">\"</span>registrationId<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>1104a89792897a539ea<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>resolution<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>1080x1920<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>loginNum<span class="pl-cce">\"</span>:168}<span class="pl-pds">"</span></span>;</td>
+      </tr>
+      <tr>
+        <td id="L41" class="blob-num js-line-number" data-line-number="41"/>
+        <td id="LC41" class="blob-code blob-code-inner js-file-line">        data <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>{<span class="pl-cce">\"</span>mobileId<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>f05fac98<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>appBundleID<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>com.gaiaworkforce.mobile<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>phoneOnly<span class="pl-cce">\"</span>:2,<span class="pl-cce">\"</span>ignorePhoneChange<span class="pl-cce">\"</span>:0,<span class="pl-cce">\"</span>isNeedReason<span class="pl-cce">\"</span>:1,<span class="pl-cce">\"</span>loginName<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>Zc0L9Zt1pZ72WbvqaX+ckA==<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>password<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>QG8ccgAa4GjbMSPiXYZQlg==<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>simId<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>|<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>phoneModel<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>OPPO OPPO R11<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>phoneSysVersion<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>7.1.1<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>appVersion<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>4.4.0<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>language<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>ZH-CN<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>isClearGesturePwd<span class="pl-cce">\"</span>:0,<span class="pl-cce">\"</span>companyCode<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>benlai<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>Accid<span class="pl-cce">\"</span>:<span class="pl-cce">\"\"</span>,<span class="pl-cce">\"</span>registrationId<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>18071adc034f7567daa<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>resolution<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>1080x1920<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>loginNum<span class="pl-cce">\"</span>:2}<span class="pl-pds">"</span></span>;</td>
+      </tr>
+      <tr>
+        <td id="L42" class="blob-num js-line-number" data-line-number="42"/>
+        <td id="LC42" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">String</span> result <span class="pl-k">=</span> <span class="pl-smi">HttpUtils</span><span class="pl-k">.</span>doPost(<span class="pl-s"><span class="pl-pds">"</span>https://benlai.gaiaworkforce.com:5555/api/Login/Login<span class="pl-pds">"</span></span>, data);</td>
+      </tr>
+      <tr>
+        <td id="L43" class="blob-num js-line-number" data-line-number="43"/>
+        <td id="LC43" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">LoginResponse</span> response <span class="pl-k">=</span> <span class="pl-c1">JSON</span><span class="pl-k">.</span>parseObject(result, <span class="pl-smi">LoginResponse</span><span class="pl-k">.</span>class);</td>
+      </tr>
+      <tr>
+        <td id="L44" class="blob-num js-line-number" data-line-number="44"/>
+        <td id="LC44" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">String</span> param <span class="pl-k">=</span> <span class="pl-smi">String</span><span class="pl-k">.</span>format(<span class="pl-s"><span class="pl-pds">"</span>{<span class="pl-cce">\"</span>sessionId<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>%s<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>longitude<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>121.463876<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>latitude<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>31.218608<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>serverTime<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>%s<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>address<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>&#20013;&#22269;&#19978;&#28023;&#24066;&#24464;&#27719;&#21306;&#35140;&#38451;&#21335;&#36335;199&#21495;<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>remark<span class="pl-cce">\"</span>:<span class="pl-cce">\"\"</span>,<span class="pl-cce">\"</span>machineID<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>95110203-f697-43c1-8b2f-e28b83c4a5e7<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>overTime<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>60<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>locationFlag<span class="pl-cce">\"</span>:2,<span class="pl-cce">\"</span>sign<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>992e66e705afae86ccbe13a93c1b82300de0746fa2fcf3dcc8783378c3aef8fa<span class="pl-cce">\"</span>,<span class="pl-cce">\"</span>timeStamp<span class="pl-cce">\"</span>:<span class="pl-cce">\"</span>20181105184610<span class="pl-cce">\"</span>}<span class="pl-pds">"</span></span>, response<span class="pl-k">.</span>getData()<span class="pl-k">.</span>getSessionId(), getStringDate());</td>
+      </tr>
+      <tr>
+        <td id="L45" class="blob-num js-line-number" data-line-number="45"/>
+        <td id="LC45" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">String</span> loginresult <span class="pl-k">=</span> <span class="pl-smi">HttpUtils</span><span class="pl-k">.</span>doPost(<span class="pl-s"><span class="pl-pds">"</span>https://benlai.gaiaworkforce.com:5555/api/Attendance/SubmitEmployeeAttendanceDataByMAP<span class="pl-pds">"</span></span>, param);</td>
+      </tr>
+      <tr>
+        <td id="L46" class="blob-num js-line-number" data-line-number="46"/>
+        <td id="LC46" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">ClockResponse</span> clockResponse <span class="pl-k">=</span> <span class="pl-c1">JSON</span><span class="pl-k">.</span>parseObject(loginresult, <span class="pl-smi">ClockResponse</span><span class="pl-k">.</span>class);</td>
+      </tr>
+      <tr>
+        <td id="L47" class="blob-num js-line-number" data-line-number="47"/>
+        <td id="LC47" class="blob-code blob-code-inner js-file-line">        logger<span class="pl-k">.</span>info(<span class="pl-smi">String</span><span class="pl-k">.</span>format(<span class="pl-s"><span class="pl-pds">"</span>&#25171;&#21345;&#32467;&#26524;:%s<span class="pl-pds">"</span></span>, clockResponse<span class="pl-k">.</span>getData()<span class="pl-k">.</span>getResult()));</td>
+      </tr>
+      <tr>
+        <td id="L48" class="blob-num js-line-number" data-line-number="48"/>
+        <td id="LC48" class="blob-code blob-code-inner js-file-line">        updateTime <span class="pl-k">=</span> getStringDate();</td>
+      </tr>
+      <tr>
+        <td id="L49" class="blob-num js-line-number" data-line-number="49"/>
+        <td id="LC49" class="blob-code blob-code-inner js-file-line">        logger<span class="pl-k">.</span>info(<span class="pl-s"><span class="pl-pds">"</span>&#25171;&#21345;&#25104;&#21151;<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L50" class="blob-num js-line-number" data-line-number="50"/>
+        <td id="LC50" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> clockResponse<span class="pl-k">.</span>getData()<span class="pl-k">.</span>getResult();</td>
+      </tr>
+      <tr>
+        <td id="L51" class="blob-num js-line-number" data-line-number="51"/>
+        <td id="LC51" class="blob-code blob-code-inner js-file-line">    }</td>
+      </tr>
+      <tr>
+        <td id="L52" class="blob-num js-line-number" data-line-number="52"/>
+        <td id="LC52" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L53" class="blob-num js-line-number" data-line-number="53"/>
+        <td id="LC53" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">query</span>() {</td>
+      </tr>
+      <tr>
+        <td id="L54" class="blob-num js-line-number" data-line-number="54"/>
+        <td id="LC54" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> updateTime;</td>
+      </tr>
+      <tr>
+        <td id="L55" class="blob-num js-line-number" data-line-number="55"/>
+        <td id="LC55" class="blob-code blob-code-inner js-file-line">    }</td>
+      </tr>
+      <tr>
+        <td id="L56" class="blob-num js-line-number" data-line-number="56"/>
+        <td id="LC56" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L57" class="blob-num js-line-number" data-line-number="57"/>
+        <td id="LC57" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-smi">String</span> <span class="pl-en">getStringDate</span>() {</td>
+      </tr>
+      <tr>
+        <td id="L58" class="blob-num js-line-number" data-line-number="58"/>
+        <td id="LC58" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">Date</span> currentTime <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Date</span>();</td>
+      </tr>
+      <tr>
+        <td id="L59" class="blob-num js-line-number" data-line-number="59"/>
+        <td id="LC59" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">SimpleDateFormat</span> formatter <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SimpleDateFormat</span>(<span class="pl-s"><span class="pl-pds">"</span>yyyy-MM-dd HH:mm:ss<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L60" class="blob-num js-line-number" data-line-number="60"/>
+        <td id="LC60" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> formatter<span class="pl-k">.</span>format(currentTime);</td>
+      </tr>
+      <tr>
+        <td id="L61" class="blob-num js-line-number" data-line-number="61"/>
+        <td id="LC61" class="blob-code blob-code-inner js-file-line">    }</td>
+      </tr>
+      <tr>
+        <td id="L62" class="blob-num js-line-number" data-line-number="62"/>
+        <td id="LC62" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L63" class="blob-num js-line-number" data-line-number="63"/>
+        <td id="LC63" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-smi">String</span> <span class="pl-en">getDate</span>() {</td>
+      </tr>
+      <tr>
+        <td id="L64" class="blob-num js-line-number" data-line-number="64"/>
+        <td id="LC64" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">Date</span> currentTime <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Date</span>();</td>
+      </tr>
+      <tr>
+        <td id="L65" class="blob-num js-line-number" data-line-number="65"/>
+        <td id="LC65" class="blob-code blob-code-inner js-file-line">        <span class="pl-smi">SimpleDateFormat</span> formatter <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SimpleDateFormat</span>(<span class="pl-s"><span class="pl-pds">"</span>yyyyMMdd<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L66" class="blob-num js-line-number" data-line-number="66"/>
+        <td id="LC66" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> formatter<span class="pl-k">.</span>format(currentTime);</td>
+      </tr>
+      <tr>
+        <td id="L67" class="blob-num js-line-number" data-line-number="67"/>
+        <td id="LC67" class="blob-code blob-code-inner js-file-line">    }</td>
+      </tr>
+      <tr>
+        <td id="L68" class="blob-num js-line-number" data-line-number="68"/>
+        <td id="LC68" class="blob-code blob-code-inner js-file-line">}</td>
+      </tr>
+</table>
+
+  

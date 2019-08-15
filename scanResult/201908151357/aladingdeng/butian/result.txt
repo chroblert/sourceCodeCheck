@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+aladingdeng|#|butian|#|aladingdeng-butian-blob-c2d216d7b892d1c3f9492a1e5e4847b4c01169a5-demo.txt.html|#|1|#||#|http://www.gaiaworks.cn|#|

@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+GreadLoveJM|#|moka|#|result-a9a5af39e28fda5087d7b7245493bbc2.html|#|5|#|gaiaworks , gaia , sa|#|http://www.gaiaworks.cn|#|

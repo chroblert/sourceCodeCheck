@@ -1,0 +1,1919 @@
+<div itemprop="text" class="Box-body p-0 blob-wrapper data type-java ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tr>
+        <td id="L1" class="blob-num js-line-number" data-line-number="1"/>
+        <td id="LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">package</span> <span class="pl-smi">gaia.crawl.datasource</span>;</td>
+      </tr>
+      <tr>
+        <td id="L2" class="blob-num js-line-number" data-line-number="2"/>
+        <td id="LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L3" class="blob-num js-line-number" data-line-number="3"/>
+        <td id="LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">gaia.Defaults</span>;</td>
+      </tr>
+      <tr>
+        <td id="L4" class="blob-num js-line-number" data-line-number="4"/>
+        <td id="LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L5" class="blob-num js-line-number" data-line-number="5"/>
+        <td id="LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.io.Reader</span>;</td>
+      </tr>
+      <tr>
+        <td id="L6" class="blob-num js-line-number" data-line-number="6"/>
+        <td id="LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.io.StringWriter</span>;</td>
+      </tr>
+      <tr>
+        <td id="L7" class="blob-num js-line-number" data-line-number="7"/>
+        <td id="LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.text.ParseException</span>;</td>
+      </tr>
+      <tr>
+        <td id="L8" class="blob-num js-line-number" data-line-number="8"/>
+        <td id="LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.util.Collection</span>;</td>
+      </tr>
+      <tr>
+        <td id="L9" class="blob-num js-line-number" data-line-number="9"/>
+        <td id="LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.util.Date</span>;</td>
+      </tr>
+      <tr>
+        <td id="L10" class="blob-num js-line-number" data-line-number="10"/>
+        <td id="LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.util.HashMap</span>;</td>
+      </tr>
+      <tr>
+        <td id="L11" class="blob-num js-line-number" data-line-number="11"/>
+        <td id="LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.util.HashSet</span>;</td>
+      </tr>
+      <tr>
+        <td id="L12" class="blob-num js-line-number" data-line-number="12"/>
+        <td id="LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.util.LinkedHashSet</span>;</td>
+      </tr>
+      <tr>
+        <td id="L13" class="blob-num js-line-number" data-line-number="13"/>
+        <td id="LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.util.Map</span>;</td>
+      </tr>
+      <tr>
+        <td id="L14" class="blob-num js-line-number" data-line-number="14"/>
+        <td id="LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">java.util.UUID</span>;</td>
+      </tr>
+      <tr>
+        <td id="L15" class="blob-num js-line-number" data-line-number="15"/>
+        <td id="LC15" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L16" class="blob-num js-line-number" data-line-number="16"/>
+        <td id="LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.apache.commons.lang.StringUtils</span>;</td>
+      </tr>
+      <tr>
+        <td id="L17" class="blob-num js-line-number" data-line-number="17"/>
+        <td id="LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.apache.solr.common.SolrInputDocument</span>;</td>
+      </tr>
+      <tr>
+        <td id="L18" class="blob-num js-line-number" data-line-number="18"/>
+        <td id="LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.apache.solr.common.util.DateUtil</span>;</td>
+      </tr>
+      <tr>
+        <td id="L19" class="blob-num js-line-number" data-line-number="19"/>
+        <td id="LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.apache.solr.core.SolrCore</span>;</td>
+      </tr>
+      <tr>
+        <td id="L20" class="blob-num js-line-number" data-line-number="20"/>
+        <td id="LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.apache.solr.schema.DateField</span>;</td>
+      </tr>
+      <tr>
+        <td id="L21" class="blob-num js-line-number" data-line-number="21"/>
+        <td id="LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.apache.solr.schema.FieldType</span>;</td>
+      </tr>
+      <tr>
+        <td id="L22" class="blob-num js-line-number" data-line-number="22"/>
+        <td id="LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.apache.solr.schema.IndexSchema</span>;</td>
+      </tr>
+      <tr>
+        <td id="L23" class="blob-num js-line-number" data-line-number="23"/>
+        <td id="LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.apache.solr.schema.SchemaField</span>;</td>
+      </tr>
+      <tr>
+        <td id="L24" class="blob-num js-line-number" data-line-number="24"/>
+        <td id="LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.codehaus.jackson.map.ObjectMapper</span>;</td>
+      </tr>
+      <tr>
+        <td id="L25" class="blob-num js-line-number" data-line-number="25"/>
+        <td id="LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.slf4j.Logger</span>;</td>
+      </tr>
+      <tr>
+        <td id="L26" class="blob-num js-line-number" data-line-number="26"/>
+        <td id="LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">org.slf4j.LoggerFactory</span>;</td>
+      </tr>
+      <tr>
+        <td id="L27" class="blob-num js-line-number" data-line-number="27"/>
+        <td id="LC27" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L28" class="blob-num js-line-number" data-line-number="28"/>
+        <td id="LC28" class="blob-code blob-code-inner js-file-line"><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">FieldMappingUtil</span> {</td>
+      </tr>
+      <tr>
+        <td id="L29" class="blob-num js-line-number" data-line-number="29"/>
+        <td id="LC29" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-smi">Logger</span> <span class="pl-c1">LOG</span> <span class="pl-k">=</span> <span class="pl-smi">LoggerFactory</span><span class="pl-k">.</span>getLogger(<span class="pl-smi">FieldMappingUtil</span><span class="pl-k">.</span>class);</td>
+      </tr>
+      <tr>
+        <td id="L30" class="blob-num js-line-number" data-line-number="30"/>
+        <td id="LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L31" class="blob-num js-line-number" data-line-number="31"/>
+        <td id="LC31" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-smi">FieldMapping</span> defaultMapping;</td>
+      </tr>
+      <tr>
+        <td id="L32" class="blob-num js-line-number" data-line-number="32"/>
+        <td id="LC32" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-smi">FieldMapping</span> tikaDefaultMapping;</td>
+      </tr>
+      <tr>
+        <td id="L33" class="blob-num js-line-number" data-line-number="33"/>
+        <td id="LC33" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-smi">FieldMapping</span> apertureDefaultMapping;</td>
+      </tr>
+      <tr>
+        <td id="L34" class="blob-num js-line-number" data-line-number="34"/>
+        <td id="LC34" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-smi">FieldMapping</span> emptyMapping <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">FieldMapping</span>();</td>
+      </tr>
+      <tr>
+        <td id="L35" class="blob-num js-line-number" data-line-number="35"/>
+        <td id="LC35" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L36" class="blob-num js-line-number" data-line-number="36"/>
+        <td id="LC36" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">addApertureFieldMapping</span>(<span class="pl-smi">FieldMapping</span> <span class="pl-v">mapping</span>, <span class="pl-k">boolean</span> <span class="pl-v">overwrite</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L37" class="blob-num js-line-number" data-line-number="37"/>
+        <td id="LC37" class="blob-code blob-code-inner js-file-line">		mapping<span class="pl-k">.</span>setFrom(apertureDefaultMapping, overwrite);</td>
+      </tr>
+      <tr>
+        <td id="L38" class="blob-num js-line-number" data-line-number="38"/>
+        <td id="LC38" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L39" class="blob-num js-line-number" data-line-number="39"/>
+        <td id="LC39" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L40" class="blob-num js-line-number" data-line-number="40"/>
+        <td id="LC40" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">addTikaFieldMapping</span>(<span class="pl-smi">FieldMapping</span> <span class="pl-v">mapping</span>, <span class="pl-k">boolean</span> <span class="pl-v">overwrite</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L41" class="blob-num js-line-number" data-line-number="41"/>
+        <td id="LC41" class="blob-code blob-code-inner js-file-line">		mapping<span class="pl-k">.</span>setFrom(tikaDefaultMapping, overwrite);</td>
+      </tr>
+      <tr>
+        <td id="L42" class="blob-num js-line-number" data-line-number="42"/>
+        <td id="LC42" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L43" class="blob-num js-line-number" data-line-number="43"/>
+        <td id="LC43" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L44" class="blob-num js-line-number" data-line-number="44"/>
+        <td id="LC44" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">verifySchema</span>(<span class="pl-smi">FieldMapping</span> <span class="pl-v">mapping</span>, <span class="pl-smi">SolrCore</span> <span class="pl-v">core</span>) <span class="pl-k">throws</span> <span class="pl-smi">Exception</span> {</td>
+      </tr>
+      <tr>
+        <td id="L45" class="blob-num js-line-number" data-line-number="45"/>
+        <td id="LC45" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (core <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L46" class="blob-num js-line-number" data-line-number="46"/>
+        <td id="LC46" class="blob-code blob-code-inner js-file-line">			<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-s"><span class="pl-pds">"</span>No SolrCore - can't verify field mapping with schema.<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L47" class="blob-num js-line-number" data-line-number="47"/>
+        <td id="LC47" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">return</span>;</td>
+      </tr>
+      <tr>
+        <td id="L48" class="blob-num js-line-number" data-line-number="48"/>
+        <td id="LC48" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L49" class="blob-num js-line-number" data-line-number="49"/>
+        <td id="LC49" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">IndexSchema</span> schema <span class="pl-k">=</span> core<span class="pl-k">.</span>getLatestSchema();</td>
+      </tr>
+      <tr>
+        <td id="L50" class="blob-num js-line-number" data-line-number="50"/>
+        <td id="LC50" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L51" class="blob-num js-line-number" data-line-number="51"/>
+        <td id="LC51" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">SchemaField</span>&gt;</span> schemaFields <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">SchemaField</span>&gt;</span>(schema<span class="pl-k">.</span>getFields());</td>
+      </tr>
+      <tr>
+        <td id="L52" class="blob-num js-line-number" data-line-number="52"/>
+        <td id="LC52" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L53" class="blob-num js-line-number" data-line-number="53"/>
+        <td id="LC53" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">SchemaField</span> uniqueKeyField <span class="pl-k">=</span> schema<span class="pl-k">.</span>getUniqueKeyField();</td>
+      </tr>
+      <tr>
+        <td id="L54" class="blob-num js-line-number" data-line-number="54"/>
+        <td id="LC54" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> uniqueKeyFieldName <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>;</td>
+      </tr>
+      <tr>
+        <td id="L55" class="blob-num js-line-number" data-line-number="55"/>
+        <td id="LC55" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (uniqueKeyField <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L56" class="blob-num js-line-number" data-line-number="56"/>
+        <td id="LC56" class="blob-code blob-code-inner js-file-line">			uniqueKeyFieldName <span class="pl-k">=</span> uniqueKeyField<span class="pl-k">.</span>getName();</td>
+      </tr>
+      <tr>
+        <td id="L57" class="blob-num js-line-number" data-line-number="57"/>
+        <td id="LC57" class="blob-code blob-code-inner js-file-line">			schemaFields<span class="pl-k">.</span>remove(uniqueKeyField<span class="pl-k">.</span>getName());</td>
+      </tr>
+      <tr>
+        <td id="L58" class="blob-num js-line-number" data-line-number="58"/>
+        <td id="LC58" class="blob-code blob-code-inner js-file-line">		} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L59" class="blob-num js-line-number" data-line-number="59"/>
+        <td id="LC59" class="blob-code blob-code-inner js-file-line">			<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>No unique key field for collection <span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(core<span class="pl-k">.</span>getName())</td>
+      </tr>
+      <tr>
+        <td id="L60" class="blob-num js-line-number" data-line-number="60"/>
+        <td id="LC60" class="blob-code blob-code-inner js-file-line">					.append(<span class="pl-s"><span class="pl-pds">"</span>; this may cause problems for some Solr features<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L61" class="blob-num js-line-number" data-line-number="61"/>
+        <td id="LC61" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L62" class="blob-num js-line-number" data-line-number="62"/>
+        <td id="LC62" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> ((mapping<span class="pl-k">.</span>getUniqueKey() <span class="pl-k">!=</span> <span class="pl-c1">null</span>) <span class="pl-k">&amp;&amp;</span> (<span class="pl-k">!</span>mapping<span class="pl-k">.</span>getUniqueKey()<span class="pl-k">.</span>equals(uniqueKeyFieldName))) {</td>
+      </tr>
+      <tr>
+        <td id="L63" class="blob-num js-line-number" data-line-number="63"/>
+        <td id="LC63" class="blob-code blob-code-inner js-file-line">			mapping<span class="pl-k">.</span>defineMapping(mapping<span class="pl-k">.</span>getUniqueKey(), uniqueKeyFieldName);</td>
+      </tr>
+      <tr>
+        <td id="L64" class="blob-num js-line-number" data-line-number="64"/>
+        <td id="LC64" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L65" class="blob-num js-line-number" data-line-number="65"/>
+        <td id="LC65" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L66" class="blob-num js-line-number" data-line-number="66"/>
+        <td id="LC66" class="blob-code blob-code-inner js-file-line">		mapping<span class="pl-k">.</span>setUniqueKey(uniqueKeyFieldName);</td>
+      </tr>
+      <tr>
+        <td id="L67" class="blob-num js-line-number" data-line-number="67"/>
+        <td id="LC67" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L68" class="blob-num js-line-number" data-line-number="68"/>
+        <td id="LC68" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (mapping<span class="pl-k">.</span>getDefaultField() <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L69" class="blob-num js-line-number" data-line-number="69"/>
+        <td id="LC69" class="blob-code blob-code-inner js-file-line">			<span class="pl-smi">SchemaField</span> fld <span class="pl-k">=</span> schema<span class="pl-k">.</span>getFieldOrNull(mapping<span class="pl-k">.</span>getDefaultField());</td>
+      </tr>
+      <tr>
+        <td id="L70" class="blob-num js-line-number" data-line-number="70"/>
+        <td id="LC70" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (fld <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L71" class="blob-num js-line-number" data-line-number="71"/>
+        <td id="LC71" class="blob-code blob-code-inner js-file-line">				<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>FieldMapping defaultField '<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(mapping<span class="pl-k">.</span>getDefaultField())</td>
+      </tr>
+      <tr>
+        <td id="L72" class="blob-num js-line-number" data-line-number="72"/>
+        <td id="LC72" class="blob-code blob-code-inner js-file-line">						.append(<span class="pl-s"><span class="pl-pds">"</span>' not present in schema! Disabling.<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L73" class="blob-num js-line-number" data-line-number="73"/>
+        <td id="LC73" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L74" class="blob-num js-line-number" data-line-number="74"/>
+        <td id="LC74" class="blob-code blob-code-inner js-file-line">				mapping<span class="pl-k">.</span>setDefaultField(<span class="pl-c1">null</span>);</td>
+      </tr>
+      <tr>
+        <td id="L75" class="blob-num js-line-number" data-line-number="75"/>
+        <td id="LC75" class="blob-code blob-code-inner js-file-line">			} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L76" class="blob-num js-line-number" data-line-number="76"/>
+        <td id="LC76" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">if</span> (fld<span class="pl-k">.</span>multiValued()) {</td>
+      </tr>
+      <tr>
+        <td id="L77" class="blob-num js-line-number" data-line-number="77"/>
+        <td id="LC77" class="blob-code blob-code-inner js-file-line">					mapping<span class="pl-k">.</span>setMultivalued(fld<span class="pl-k">.</span>getName(), <span class="pl-c1">true</span>);</td>
+      </tr>
+      <tr>
+        <td id="L78" class="blob-num js-line-number" data-line-number="78"/>
+        <td id="LC78" class="blob-code blob-code-inner js-file-line">				}</td>
+      </tr>
+      <tr>
+        <td id="L79" class="blob-num js-line-number" data-line-number="79"/>
+        <td id="LC79" class="blob-code blob-code-inner js-file-line">				schemaFields<span class="pl-k">.</span>remove(fld<span class="pl-k">.</span>getName());</td>
+      </tr>
+      <tr>
+        <td id="L80" class="blob-num js-line-number" data-line-number="80"/>
+        <td id="LC80" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L81" class="blob-num js-line-number" data-line-number="81"/>
+        <td id="LC81" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L82" class="blob-num js-line-number" data-line-number="82"/>
+        <td id="LC82" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L83" class="blob-num js-line-number" data-line-number="83"/>
+        <td id="LC83" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">SchemaField</span> fld <span class="pl-k">=</span> schema<span class="pl-k">.</span>getFieldOrNull(mapping<span class="pl-k">.</span>getDatasourceField());</td>
+      </tr>
+      <tr>
+        <td id="L84" class="blob-num js-line-number" data-line-number="84"/>
+        <td id="LC84" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (fld <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L85" class="blob-num js-line-number" data-line-number="85"/>
+        <td id="LC85" class="blob-code blob-code-inner js-file-line">			<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>FieldMapping datasourceField '<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(mapping<span class="pl-k">.</span>getDatasourceField())</td>
+      </tr>
+      <tr>
+        <td id="L86" class="blob-num js-line-number" data-line-number="86"/>
+        <td id="LC86" class="blob-code blob-code-inner js-file-line">					.append(<span class="pl-s"><span class="pl-pds">"</span>' not present in schema!<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L87" class="blob-num js-line-number" data-line-number="87"/>
+        <td id="LC87" class="blob-code blob-code-inner js-file-line">		} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L88" class="blob-num js-line-number" data-line-number="88"/>
+        <td id="LC88" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (fld<span class="pl-k">.</span>multiValued()) {</td>
+      </tr>
+      <tr>
+        <td id="L89" class="blob-num js-line-number" data-line-number="89"/>
+        <td id="LC89" class="blob-code blob-code-inner js-file-line">				mapping<span class="pl-k">.</span>setMultivalued(fld<span class="pl-k">.</span>getName(), <span class="pl-c1">true</span>);</td>
+      </tr>
+      <tr>
+        <td id="L90" class="blob-num js-line-number" data-line-number="90"/>
+        <td id="LC90" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L91" class="blob-num js-line-number" data-line-number="91"/>
+        <td id="LC91" class="blob-code blob-code-inner js-file-line">			schemaFields<span class="pl-k">.</span>remove(fld<span class="pl-k">.</span>getName());</td>
+      </tr>
+      <tr>
+        <td id="L92" class="blob-num js-line-number" data-line-number="92"/>
+        <td id="LC92" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L93" class="blob-num js-line-number" data-line-number="93"/>
+        <td id="LC93" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L94" class="blob-num js-line-number" data-line-number="94"/>
+        <td id="LC94" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (mapping<span class="pl-k">.</span>getDynamicField() <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L95" class="blob-num js-line-number" data-line-number="95"/>
+        <td id="LC95" class="blob-code blob-code-inner js-file-line">			<span class="pl-smi">SchemaField</span> field <span class="pl-k">=</span> schema<span class="pl-k">.</span>getFieldOrNull(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(mapping<span class="pl-k">.</span>getDynamicField())<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>_any<span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="L96" class="blob-num js-line-number" data-line-number="96"/>
+        <td id="LC96" class="blob-code blob-code-inner js-file-line">					.toString());</td>
+      </tr>
+      <tr>
+        <td id="L97" class="blob-num js-line-number" data-line-number="97"/>
+        <td id="LC97" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (field <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L98" class="blob-num js-line-number" data-line-number="98"/>
+        <td id="LC98" class="blob-code blob-code-inner js-file-line">				<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>FieldMapping dynamicField '<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(mapping<span class="pl-k">.</span>getDynamicField())</td>
+      </tr>
+      <tr>
+        <td id="L99" class="blob-num js-line-number" data-line-number="99"/>
+        <td id="LC99" class="blob-code blob-code-inner js-file-line">						.append(<span class="pl-s"><span class="pl-pds">"</span>' not present in schema! Disabling.<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L100" class="blob-num js-line-number" data-line-number="100"/>
+        <td id="LC100" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L101" class="blob-num js-line-number" data-line-number="101"/>
+        <td id="LC101" class="blob-code blob-code-inner js-file-line">				mapping<span class="pl-k">.</span>setDynamicField(<span class="pl-c1">null</span>);</td>
+      </tr>
+      <tr>
+        <td id="L102" class="blob-num js-line-number" data-line-number="102"/>
+        <td id="LC102" class="blob-code blob-code-inner js-file-line">			} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L103" class="blob-num js-line-number" data-line-number="103"/>
+        <td id="LC103" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">if</span> (field<span class="pl-k">.</span>multiValued()) {</td>
+      </tr>
+      <tr>
+        <td id="L104" class="blob-num js-line-number" data-line-number="104"/>
+        <td id="LC104" class="blob-code blob-code-inner js-file-line">					mapping<span class="pl-k">.</span>setMultivalued(mapping<span class="pl-k">.</span>getDynamicField(), <span class="pl-c1">true</span>);</td>
+      </tr>
+      <tr>
+        <td id="L105" class="blob-num js-line-number" data-line-number="105"/>
+        <td id="LC105" class="blob-code blob-code-inner js-file-line">				}</td>
+      </tr>
+      <tr>
+        <td id="L106" class="blob-num js-line-number" data-line-number="106"/>
+        <td id="LC106" class="blob-code blob-code-inner js-file-line">				schemaFields<span class="pl-k">.</span>remove(fld<span class="pl-k">.</span>getName());</td>
+      </tr>
+      <tr>
+        <td id="L107" class="blob-num js-line-number" data-line-number="107"/>
+        <td id="LC107" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L108" class="blob-num js-line-number" data-line-number="108"/>
+        <td id="LC108" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L109" class="blob-num js-line-number" data-line-number="109"/>
+        <td id="LC109" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">HashSet&lt;<span class="pl-smi">String</span>&gt;</span> srcNames <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">HashSet&lt;<span class="pl-smi">String</span>&gt;</span>(mapping<span class="pl-k">.</span>getMappings()<span class="pl-k">.</span>keySet());</td>
+      </tr>
+      <tr>
+        <td id="L110" class="blob-num js-line-number" data-line-number="110"/>
+        <td id="LC110" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">for</span> (<span class="pl-smi">String</span> srcName <span class="pl-k">:</span> srcNames) {</td>
+      </tr>
+      <tr>
+        <td id="L111" class="blob-num js-line-number" data-line-number="111"/>
+        <td id="LC111" class="blob-code blob-code-inner js-file-line">			<span class="pl-smi">String</span> tgtName <span class="pl-k">=</span> (<span class="pl-smi">String</span>) mapping<span class="pl-k">.</span>getMappings()<span class="pl-k">.</span>get(srcName);</td>
+      </tr>
+      <tr>
+        <td id="L112" class="blob-num js-line-number" data-line-number="112"/>
+        <td id="LC112" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L113" class="blob-num js-line-number" data-line-number="113"/>
+        <td id="LC113" class="blob-code blob-code-inner js-file-line">			schemaFields<span class="pl-k">.</span>remove(tgtName);</td>
+      </tr>
+      <tr>
+        <td id="L114" class="blob-num js-line-number" data-line-number="114"/>
+        <td id="LC114" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (tgtName <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L115" class="blob-num js-line-number" data-line-number="115"/>
+        <td id="LC115" class="blob-code blob-code-inner js-file-line">				fld <span class="pl-k">=</span> schema<span class="pl-k">.</span>getFieldOrNull(tgtName);</td>
+      </tr>
+      <tr>
+        <td id="L116" class="blob-num js-line-number" data-line-number="116"/>
+        <td id="LC116" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">if</span> (fld <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L117" class="blob-num js-line-number" data-line-number="117"/>
+        <td id="LC117" class="blob-code blob-code-inner js-file-line">					<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>FieldMapping '<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(srcName)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>'-&gt;'<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(tgtName)</td>
+      </tr>
+      <tr>
+        <td id="L118" class="blob-num js-line-number" data-line-number="118"/>
+        <td id="LC118" class="blob-code blob-code-inner js-file-line">							.append(<span class="pl-s"><span class="pl-pds">"</span>' target field not present in schema! Disabling.<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L119" class="blob-num js-line-number" data-line-number="119"/>
+        <td id="LC119" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L120" class="blob-num js-line-number" data-line-number="120"/>
+        <td id="LC120" class="blob-code blob-code-inner js-file-line">					mapping<span class="pl-k">.</span>removeMapping(srcName);</td>
+      </tr>
+      <tr>
+        <td id="L121" class="blob-num js-line-number" data-line-number="121"/>
+        <td id="LC121" class="blob-code blob-code-inner js-file-line">				} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L122" class="blob-num js-line-number" data-line-number="122"/>
+        <td id="LC122" class="blob-code blob-code-inner js-file-line">					adjustTypeMapping(fld, mapping);</td>
+      </tr>
+      <tr>
+        <td id="L123" class="blob-num js-line-number" data-line-number="123"/>
+        <td id="LC123" class="blob-code blob-code-inner js-file-line">				}</td>
+      </tr>
+      <tr>
+        <td id="L124" class="blob-num js-line-number" data-line-number="124"/>
+        <td id="LC124" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L125" class="blob-num js-line-number" data-line-number="125"/>
+        <td id="LC125" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L126" class="blob-num js-line-number" data-line-number="126"/>
+        <td id="LC126" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">for</span> (<span class="pl-smi">SchemaField</span> sf <span class="pl-k">:</span> schemaFields<span class="pl-k">.</span>values())</td>
+      </tr>
+      <tr>
+        <td id="L127" class="blob-num js-line-number" data-line-number="127"/>
+        <td id="LC127" class="blob-code blob-code-inner js-file-line">			adjustTypeMapping(sf, mapping);</td>
+      </tr>
+      <tr>
+        <td id="L128" class="blob-num js-line-number" data-line-number="128"/>
+        <td id="LC128" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L129" class="blob-num js-line-number" data-line-number="129"/>
+        <td id="LC129" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L130" class="blob-num js-line-number" data-line-number="130"/>
+        <td id="LC130" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">adjustTypeMapping</span>(<span class="pl-smi">SchemaField</span> <span class="pl-v">fld</span>, <span class="pl-smi">FieldMapping</span> <span class="pl-v">mapping</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L131" class="blob-num js-line-number" data-line-number="131"/>
+        <td id="LC131" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (mapping<span class="pl-k">.</span>isMultivalued(fld<span class="pl-k">.</span>getName()) <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L132" class="blob-num js-line-number" data-line-number="132"/>
+        <td id="LC132" class="blob-code blob-code-inner js-file-line">			mapping<span class="pl-k">.</span>setMultivalued(fld<span class="pl-k">.</span>getName(), fld<span class="pl-k">.</span>multiValued());</td>
+      </tr>
+      <tr>
+        <td id="L133" class="blob-num js-line-number" data-line-number="133"/>
+        <td id="LC133" class="blob-code blob-code-inner js-file-line">		} <span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-k">!</span>fld<span class="pl-k">.</span>multiValued()) {</td>
+      </tr>
+      <tr>
+        <td id="L134" class="blob-num js-line-number" data-line-number="134"/>
+        <td id="LC134" class="blob-code blob-code-inner js-file-line">			mapping<span class="pl-k">.</span>setMultivalued(fld<span class="pl-k">.</span>getName(), <span class="pl-c1">false</span>);</td>
+      </tr>
+      <tr>
+        <td id="L135" class="blob-num js-line-number" data-line-number="135"/>
+        <td id="LC135" class="blob-code blob-code-inner js-file-line">		} <span class="pl-k">else</span> <span class="pl-k">if</span> (mapping<span class="pl-k">.</span>isMultivalued(fld<span class="pl-k">.</span>getName())<span class="pl-k">.</span>booleanValue())</td>
+      </tr>
+      <tr>
+        <td id="L136" class="blob-num js-line-number" data-line-number="136"/>
+        <td id="LC136" class="blob-code blob-code-inner js-file-line">			;</td>
+      </tr>
+      <tr>
+        <td id="L137" class="blob-num js-line-number" data-line-number="137"/>
+        <td id="LC137" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (mapping<span class="pl-k">.</span>getTypes()<span class="pl-k">.</span>containsKey(fld<span class="pl-k">.</span>getName())) {</td>
+      </tr>
+      <tr>
+        <td id="L138" class="blob-num js-line-number" data-line-number="138"/>
+        <td id="LC138" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">return</span>;</td>
+      </tr>
+      <tr>
+        <td id="L139" class="blob-num js-line-number" data-line-number="139"/>
+        <td id="LC139" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L140" class="blob-num js-line-number" data-line-number="140"/>
+        <td id="LC140" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L141" class="blob-num js-line-number" data-line-number="141"/>
+        <td id="LC141" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">FieldType</span> type <span class="pl-k">=</span> fld<span class="pl-k">.</span>getType();</td>
+      </tr>
+      <tr>
+        <td id="L142" class="blob-num js-line-number" data-line-number="142"/>
+        <td id="LC142" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> ((type <span class="pl-k">instanceof</span> <span class="pl-smi">DateField</span>))</td>
+      </tr>
+      <tr>
+        <td id="L143" class="blob-num js-line-number" data-line-number="143"/>
+        <td id="LC143" class="blob-code blob-code-inner js-file-line">			mapping<span class="pl-k">.</span>defineType(fld<span class="pl-k">.</span>getName(), <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>DATE</span>);</td>
+      </tr>
+      <tr>
+        <td id="L144" class="blob-num js-line-number" data-line-number="144"/>
+        <td id="LC144" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">else</span> <span class="pl-k">if</span> (type<span class="pl-k">.</span>getClass()<span class="pl-k">.</span>getName()<span class="pl-k">.</span>endsWith(<span class="pl-s"><span class="pl-pds">"</span>DoubleField<span class="pl-pds">"</span></span>))</td>
+      </tr>
+      <tr>
+        <td id="L145" class="blob-num js-line-number" data-line-number="145"/>
+        <td id="LC145" class="blob-code blob-code-inner js-file-line">			mapping<span class="pl-k">.</span>defineType(fld<span class="pl-k">.</span>getName(), <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>DOUBLE</span>);</td>
+      </tr>
+      <tr>
+        <td id="L146" class="blob-num js-line-number" data-line-number="146"/>
+        <td id="LC146" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">else</span> <span class="pl-k">if</span> (type<span class="pl-k">.</span>getClass()<span class="pl-k">.</span>getName()<span class="pl-k">.</span>endsWith(<span class="pl-s"><span class="pl-pds">"</span>FloatField<span class="pl-pds">"</span></span>))</td>
+      </tr>
+      <tr>
+        <td id="L147" class="blob-num js-line-number" data-line-number="147"/>
+        <td id="LC147" class="blob-code blob-code-inner js-file-line">			mapping<span class="pl-k">.</span>defineType(fld<span class="pl-k">.</span>getName(), <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>FLOAT</span>);</td>
+      </tr>
+      <tr>
+        <td id="L148" class="blob-num js-line-number" data-line-number="148"/>
+        <td id="LC148" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">else</span> <span class="pl-k">if</span> (type<span class="pl-k">.</span>getClass()<span class="pl-k">.</span>getName()<span class="pl-k">.</span>endsWith(<span class="pl-s"><span class="pl-pds">"</span>IntField<span class="pl-pds">"</span></span>))</td>
+      </tr>
+      <tr>
+        <td id="L149" class="blob-num js-line-number" data-line-number="149"/>
+        <td id="LC149" class="blob-code blob-code-inner js-file-line">			mapping<span class="pl-k">.</span>defineType(fld<span class="pl-k">.</span>getName(), <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>INT</span>);</td>
+      </tr>
+      <tr>
+        <td id="L150" class="blob-num js-line-number" data-line-number="150"/>
+        <td id="LC150" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">else</span> <span class="pl-k">if</span> (type<span class="pl-k">.</span>getClass()<span class="pl-k">.</span>getName()<span class="pl-k">.</span>endsWith(<span class="pl-s"><span class="pl-pds">"</span>ShortField<span class="pl-pds">"</span></span>))</td>
+      </tr>
+      <tr>
+        <td id="L151" class="blob-num js-line-number" data-line-number="151"/>
+        <td id="LC151" class="blob-code blob-code-inner js-file-line">			mapping<span class="pl-k">.</span>defineType(fld<span class="pl-k">.</span>getName(), <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>INT</span>);</td>
+      </tr>
+      <tr>
+        <td id="L152" class="blob-num js-line-number" data-line-number="152"/>
+        <td id="LC152" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">else</span> <span class="pl-k">if</span> (type<span class="pl-k">.</span>getClass()<span class="pl-k">.</span>getName()<span class="pl-k">.</span>endsWith(<span class="pl-s"><span class="pl-pds">"</span>LongField<span class="pl-pds">"</span></span>))</td>
+      </tr>
+      <tr>
+        <td id="L153" class="blob-num js-line-number" data-line-number="153"/>
+        <td id="LC153" class="blob-code blob-code-inner js-file-line">			mapping<span class="pl-k">.</span>defineType(fld<span class="pl-k">.</span>getName(), <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>LONG</span>);</td>
+      </tr>
+      <tr>
+        <td id="L154" class="blob-num js-line-number" data-line-number="154"/>
+        <td id="LC154" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L155" class="blob-num js-line-number" data-line-number="155"/>
+        <td id="LC155" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L156" class="blob-num js-line-number" data-line-number="156"/>
+        <td id="LC156" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">normalizeFields</span>(<span class="pl-smi">SolrInputDocument</span> <span class="pl-v">doc</span>, <span class="pl-smi">FieldMapping</span> <span class="pl-v">mapping</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L157" class="blob-num js-line-number" data-line-number="157"/>
+        <td id="LC157" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">HashSet&lt;<span class="pl-smi">String</span>&gt;</span> fieldNames <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">HashSet&lt;<span class="pl-smi">String</span>&gt;</span>(doc<span class="pl-k">.</span>getFieldNames());</td>
+      </tr>
+      <tr>
+        <td id="L158" class="blob-num js-line-number" data-line-number="158"/>
+        <td id="LC158" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L159" class="blob-num js-line-number" data-line-number="159"/>
+        <td id="LC159" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">for</span> (<span class="pl-smi">Map</span><span class="pl-k">.</span><span class="pl-k">Entry&lt;<span class="pl-smi">String</span>, <span class="pl-smi">String</span>&gt;</span> e <span class="pl-k">:</span> mapping<span class="pl-k">.</span>getLiterals()<span class="pl-k">.</span>entrySet()) {</td>
+      </tr>
+      <tr>
+        <td id="L160" class="blob-num js-line-number" data-line-number="160"/>
+        <td id="LC160" class="blob-code blob-code-inner js-file-line">			doc<span class="pl-k">.</span>addField((<span class="pl-smi">String</span>) e<span class="pl-k">.</span>getKey(), e<span class="pl-k">.</span>getValue());</td>
+      </tr>
+      <tr>
+        <td id="L161" class="blob-num js-line-number" data-line-number="161"/>
+        <td id="LC161" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L162" class="blob-num js-line-number" data-line-number="162"/>
+        <td id="LC162" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L163" class="blob-num js-line-number" data-line-number="163"/>
+        <td id="LC163" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">for</span> (<span class="pl-smi">String</span> name <span class="pl-k">:</span> fieldNames)</td>
+      </tr>
+      <tr>
+        <td id="L164" class="blob-num js-line-number" data-line-number="164"/>
+        <td id="LC164" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (name <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L165" class="blob-num js-line-number" data-line-number="165"/>
+        <td id="LC165" class="blob-code blob-code-inner js-file-line">				doc<span class="pl-k">.</span>remove(name);</td>
+      </tr>
+      <tr>
+        <td id="L166" class="blob-num js-line-number" data-line-number="166"/>
+        <td id="LC166" class="blob-code blob-code-inner js-file-line">			} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L167" class="blob-num js-line-number" data-line-number="167"/>
+        <td id="LC167" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">Collection&lt;<span class="pl-smi">Object</span>&gt;</span> values <span class="pl-k">=</span> doc<span class="pl-k">.</span>getFieldValues(name);</td>
+      </tr>
+      <tr>
+        <td id="L168" class="blob-num js-line-number" data-line-number="168"/>
+        <td id="LC168" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">if</span> ((values <span class="pl-k">==</span> <span class="pl-c1">null</span>) <span class="pl-k">||</span> (values<span class="pl-k">.</span>size() <span class="pl-k">==</span> <span class="pl-c1">0</span>)) {</td>
+      </tr>
+      <tr>
+        <td id="L169" class="blob-num js-line-number" data-line-number="169"/>
+        <td id="LC169" class="blob-code blob-code-inner js-file-line">					doc<span class="pl-k">.</span>remove(name);</td>
+      </tr>
+      <tr>
+        <td id="L170" class="blob-num js-line-number" data-line-number="170"/>
+        <td id="LC170" class="blob-code blob-code-inner js-file-line">				} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L171" class="blob-num js-line-number" data-line-number="171"/>
+        <td id="LC171" class="blob-code blob-code-inner js-file-line">					<span class="pl-k">if</span> ((name<span class="pl-k">.</span>equals(<span class="pl-s"><span class="pl-pds">"</span>mimeType<span class="pl-pds">"</span></span>)) <span class="pl-k">&amp;&amp;</span> (mapping<span class="pl-k">.</span>isMultivalued(<span class="pl-s"><span class="pl-pds">"</span>mimeType<span class="pl-pds">"</span></span>) <span class="pl-k">!=</span> <span class="pl-c1">null</span>)</td>
+      </tr>
+      <tr>
+        <td id="L172" class="blob-num js-line-number" data-line-number="172"/>
+        <td id="LC172" class="blob-code blob-code-inner js-file-line">							<span class="pl-k">&amp;&amp;</span> (<span class="pl-k">!</span>mapping<span class="pl-k">.</span>isMultivalued(<span class="pl-s"><span class="pl-pds">"</span>mimeType<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>booleanValue())) {</td>
+      </tr>
+      <tr>
+        <td id="L173" class="blob-num js-line-number" data-line-number="173"/>
+        <td id="LC173" class="blob-code blob-code-inner js-file-line">						doc<span class="pl-k">.</span>remove(name);</td>
+      </tr>
+      <tr>
+        <td id="L174" class="blob-num js-line-number" data-line-number="174"/>
+        <td id="LC174" class="blob-code blob-code-inner js-file-line">						<span class="pl-smi">String</span> last <span class="pl-k">=</span> <span class="pl-c1">null</span>;</td>
+      </tr>
+      <tr>
+        <td id="L175" class="blob-num js-line-number" data-line-number="175"/>
+        <td id="LC175" class="blob-code blob-code-inner js-file-line">						<span class="pl-k">for</span> (<span class="pl-smi">Object</span> o <span class="pl-k">:</span> values) {</td>
+      </tr>
+      <tr>
+        <td id="L176" class="blob-num js-line-number" data-line-number="176"/>
+        <td id="LC176" class="blob-code blob-code-inner js-file-line">							<span class="pl-smi">String</span> v <span class="pl-k">=</span> o<span class="pl-k">.</span>toString();</td>
+      </tr>
+      <tr>
+        <td id="L177" class="blob-num js-line-number" data-line-number="177"/>
+        <td id="LC177" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L178" class="blob-num js-line-number" data-line-number="178"/>
+        <td id="LC178" class="blob-code blob-code-inner js-file-line">							<span class="pl-k">int</span> pos <span class="pl-k">=</span> v<span class="pl-k">.</span>indexOf(<span class="pl-c1">59</span>);</td>
+      </tr>
+      <tr>
+        <td id="L179" class="blob-num js-line-number" data-line-number="179"/>
+        <td id="LC179" class="blob-code blob-code-inner js-file-line">							<span class="pl-k">if</span> (pos <span class="pl-k">!=</span> <span class="pl-k">-</span><span class="pl-c1">1</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L180" class="blob-num js-line-number" data-line-number="180"/>
+        <td id="LC180" class="blob-code blob-code-inner js-file-line">								v <span class="pl-k">=</span> v<span class="pl-k">.</span>substring(<span class="pl-c1">0</span>, pos);</td>
+      </tr>
+      <tr>
+        <td id="L181" class="blob-num js-line-number" data-line-number="181"/>
+        <td id="LC181" class="blob-code blob-code-inner js-file-line">							}</td>
+      </tr>
+      <tr>
+        <td id="L182" class="blob-num js-line-number" data-line-number="182"/>
+        <td id="LC182" class="blob-code blob-code-inner js-file-line">							<span class="pl-k">if</span> ((last <span class="pl-k">==</span> <span class="pl-c1">null</span>) <span class="pl-k">||</span> (last<span class="pl-k">.</span>length() <span class="pl-k">&lt;</span> v<span class="pl-k">.</span>length())) {</td>
+      </tr>
+      <tr>
+        <td id="L183" class="blob-num js-line-number" data-line-number="183"/>
+        <td id="LC183" class="blob-code blob-code-inner js-file-line">								last <span class="pl-k">=</span> v;</td>
+      </tr>
+      <tr>
+        <td id="L184" class="blob-num js-line-number" data-line-number="184"/>
+        <td id="LC184" class="blob-code blob-code-inner js-file-line">							}</td>
+      </tr>
+      <tr>
+        <td id="L185" class="blob-num js-line-number" data-line-number="185"/>
+        <td id="LC185" class="blob-code blob-code-inner js-file-line">						}</td>
+      </tr>
+      <tr>
+        <td id="L186" class="blob-num js-line-number" data-line-number="186"/>
+        <td id="LC186" class="blob-code blob-code-inner js-file-line">						doc<span class="pl-k">.</span>addField(name, last);</td>
+      </tr>
+      <tr>
+        <td id="L187" class="blob-num js-line-number" data-line-number="187"/>
+        <td id="LC187" class="blob-code blob-code-inner js-file-line">					}</td>
+      </tr>
+      <tr>
+        <td id="L188" class="blob-num js-line-number" data-line-number="188"/>
+        <td id="LC188" class="blob-code blob-code-inner js-file-line">					<span class="pl-smi">Boolean</span> multi;</td>
+      </tr>
+      <tr>
+        <td id="L189" class="blob-num js-line-number" data-line-number="189"/>
+        <td id="LC189" class="blob-code blob-code-inner js-file-line">					<span class="pl-k">boolean</span> set;</td>
+      </tr>
+      <tr>
+        <td id="L190" class="blob-num js-line-number" data-line-number="190"/>
+        <td id="LC190" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L191" class="blob-num js-line-number" data-line-number="191"/>
+        <td id="LC191" class="blob-code blob-code-inner js-file-line">					<span class="pl-k">if</span> (mapping<span class="pl-k">.</span>checkType(name) <span class="pl-k">==</span> <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>DATE</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L192" class="blob-num js-line-number" data-line-number="192"/>
+        <td id="LC192" class="blob-code blob-code-inner js-file-line">						doc<span class="pl-k">.</span>remove(name);</td>
+      </tr>
+      <tr>
+        <td id="L193" class="blob-num js-line-number" data-line-number="193"/>
+        <td id="LC193" class="blob-code blob-code-inner js-file-line">						multi <span class="pl-k">=</span> mapping<span class="pl-k">.</span>isMultivalued(name);</td>
+      </tr>
+      <tr>
+        <td id="L194" class="blob-num js-line-number" data-line-number="194"/>
+        <td id="LC194" class="blob-code blob-code-inner js-file-line">						set <span class="pl-k">=</span> <span class="pl-c1">false</span>;</td>
+      </tr>
+      <tr>
+        <td id="L195" class="blob-num js-line-number" data-line-number="195"/>
+        <td id="LC195" class="blob-code blob-code-inner js-file-line">						<span class="pl-k">for</span> (<span class="pl-smi">Object</span> o <span class="pl-k">:</span> values) {</td>
+      </tr>
+      <tr>
+        <td id="L196" class="blob-num js-line-number" data-line-number="196"/>
+        <td id="LC196" class="blob-code blob-code-inner js-file-line">							<span class="pl-k">if</span> ((o <span class="pl-k">instanceof</span> <span class="pl-smi">Date</span>)) {</td>
+      </tr>
+      <tr>
+        <td id="L197" class="blob-num js-line-number" data-line-number="197"/>
+        <td id="LC197" class="blob-code blob-code-inner js-file-line">								doc<span class="pl-k">.</span>addField(name, o);</td>
+      </tr>
+      <tr>
+        <td id="L198" class="blob-num js-line-number" data-line-number="198"/>
+        <td id="LC198" class="blob-code blob-code-inner js-file-line">								set <span class="pl-k">=</span> <span class="pl-c1">true</span>;</td>
+      </tr>
+      <tr>
+        <td id="L199" class="blob-num js-line-number" data-line-number="199"/>
+        <td id="LC199" class="blob-code blob-code-inner js-file-line">							} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L200" class="blob-num js-line-number" data-line-number="200"/>
+        <td id="LC200" class="blob-code blob-code-inner js-file-line">								<span class="pl-smi">String</span> dateTime <span class="pl-k">=</span> o<span class="pl-k">.</span>toString();</td>
+      </tr>
+      <tr>
+        <td id="L201" class="blob-num js-line-number" data-line-number="201"/>
+        <td id="LC201" class="blob-code blob-code-inner js-file-line">								<span class="pl-smi">Date</span> validDate <span class="pl-k">=</span> <span class="pl-c1">null</span>;</td>
+      </tr>
+      <tr>
+        <td id="L202" class="blob-num js-line-number" data-line-number="202"/>
+        <td id="LC202" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">try</span> {</td>
+      </tr>
+      <tr>
+        <td id="L203" class="blob-num js-line-number" data-line-number="203"/>
+        <td id="LC203" class="blob-code blob-code-inner js-file-line">									validDate <span class="pl-k">=</span> <span class="pl-smi">DateUtil</span><span class="pl-k">.</span>parseDate(dateTime);</td>
+      </tr>
+      <tr>
+        <td id="L204" class="blob-num js-line-number" data-line-number="204"/>
+        <td id="LC204" class="blob-code blob-code-inner js-file-line">								} <span class="pl-k">catch</span> (<span class="pl-smi">ParseException</span> e) {</td>
+      </tr>
+      <tr>
+        <td id="L205" class="blob-num js-line-number" data-line-number="205"/>
+        <td id="LC205" class="blob-code blob-code-inner js-file-line">									<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>Invalid date in field <span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(name)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>: '<span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="L206" class="blob-num js-line-number" data-line-number="206"/>
+        <td id="LC206" class="blob-code blob-code-inner js-file-line">											.append(dateTime)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>' removed: <span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(e<span class="pl-k">.</span>toString())<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L207" class="blob-num js-line-number" data-line-number="207"/>
+        <td id="LC207" class="blob-code blob-code-inner js-file-line">								}</td>
+      </tr>
+      <tr>
+        <td id="L208" class="blob-num js-line-number" data-line-number="208"/>
+        <td id="LC208" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">if</span> (validDate <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L209" class="blob-num js-line-number" data-line-number="209"/>
+        <td id="LC209" class="blob-code blob-code-inner js-file-line">									doc<span class="pl-k">.</span>addField(name, validDate);</td>
+      </tr>
+      <tr>
+        <td id="L210" class="blob-num js-line-number" data-line-number="210"/>
+        <td id="LC210" class="blob-code blob-code-inner js-file-line">									set <span class="pl-k">=</span> <span class="pl-c1">true</span>;</td>
+      </tr>
+      <tr>
+        <td id="L211" class="blob-num js-line-number" data-line-number="211"/>
+        <td id="LC211" class="blob-code blob-code-inner js-file-line">								}</td>
+      </tr>
+      <tr>
+        <td id="L212" class="blob-num js-line-number" data-line-number="212"/>
+        <td id="LC212" class="blob-code blob-code-inner js-file-line">							}</td>
+      </tr>
+      <tr>
+        <td id="L213" class="blob-num js-line-number" data-line-number="213"/>
+        <td id="LC213" class="blob-code blob-code-inner js-file-line">							<span class="pl-k">if</span> ((multi <span class="pl-k">!=</span> <span class="pl-c1">null</span>) <span class="pl-k">&amp;&amp;</span> (<span class="pl-k">!</span>multi<span class="pl-k">.</span>booleanValue()) <span class="pl-k">&amp;&amp;</span> (set))</td>
+      </tr>
+      <tr>
+        <td id="L214" class="blob-num js-line-number" data-line-number="214"/>
+        <td id="LC214" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">break</span>;</td>
+      </tr>
+      <tr>
+        <td id="L215" class="blob-num js-line-number" data-line-number="215"/>
+        <td id="LC215" class="blob-code blob-code-inner js-file-line">						}</td>
+      </tr>
+      <tr>
+        <td id="L216" class="blob-num js-line-number" data-line-number="216"/>
+        <td id="LC216" class="blob-code blob-code-inner js-file-line">					} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L217" class="blob-num js-line-number" data-line-number="217"/>
+        <td id="LC217" class="blob-code blob-code-inner js-file-line">						<span class="pl-k">if</span> (mapping<span class="pl-k">.</span>checkType(name) <span class="pl-k">==</span> <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>INT</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L218" class="blob-num js-line-number" data-line-number="218"/>
+        <td id="LC218" class="blob-code blob-code-inner js-file-line">							doc<span class="pl-k">.</span>remove(name);</td>
+      </tr>
+      <tr>
+        <td id="L219" class="blob-num js-line-number" data-line-number="219"/>
+        <td id="LC219" class="blob-code blob-code-inner js-file-line">							<span class="pl-k">for</span> (<span class="pl-smi">Object</span> o <span class="pl-k">:</span> values) {</td>
+      </tr>
+      <tr>
+        <td id="L220" class="blob-num js-line-number" data-line-number="220"/>
+        <td id="LC220" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">if</span> ((o <span class="pl-k">instanceof</span> <span class="pl-smi">Number</span>))</td>
+      </tr>
+      <tr>
+        <td id="L221" class="blob-num js-line-number" data-line-number="221"/>
+        <td id="LC221" class="blob-code blob-code-inner js-file-line">									doc<span class="pl-k">.</span>addField(name, <span class="pl-smi">Long</span><span class="pl-k">.</span>valueOf(((<span class="pl-smi">Number</span>) o)<span class="pl-k">.</span>longValue()));</td>
+      </tr>
+      <tr>
+        <td id="L222" class="blob-num js-line-number" data-line-number="222"/>
+        <td id="LC222" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L223" class="blob-num js-line-number" data-line-number="223"/>
+        <td id="LC223" class="blob-code blob-code-inner js-file-line">									<span class="pl-k">try</span> {</td>
+      </tr>
+      <tr>
+        <td id="L224" class="blob-num js-line-number" data-line-number="224"/>
+        <td id="LC224" class="blob-code blob-code-inner js-file-line">										<span class="pl-smi">Double</span> <span class="pl-smi">D</span> <span class="pl-k">=</span> <span class="pl-smi">Double</span><span class="pl-k">.</span>valueOf(<span class="pl-smi">Double</span><span class="pl-k">.</span>parseDouble(<span class="pl-smi">String</span><span class="pl-k">.</span>valueOf(o)));</td>
+      </tr>
+      <tr>
+        <td id="L225" class="blob-num js-line-number" data-line-number="225"/>
+        <td id="LC225" class="blob-code blob-code-inner js-file-line">										doc<span class="pl-k">.</span>addField(name, <span class="pl-smi">Integer</span><span class="pl-k">.</span>valueOf(<span class="pl-smi">D</span><span class="pl-k">.</span>intValue()));</td>
+      </tr>
+      <tr>
+        <td id="L226" class="blob-num js-line-number" data-line-number="226"/>
+        <td id="LC226" class="blob-code blob-code-inner js-file-line">									} <span class="pl-k">catch</span> (<span class="pl-smi">Exception</span> e) {</td>
+      </tr>
+      <tr>
+        <td id="L227" class="blob-num js-line-number" data-line-number="227"/>
+        <td id="LC227" class="blob-code blob-code-inner js-file-line">										<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>Invalid integer in field <span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(name)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>: '<span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="L228" class="blob-num js-line-number" data-line-number="228"/>
+        <td id="LC228" class="blob-code blob-code-inner js-file-line">												.append(o)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>' removed.<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L229" class="blob-num js-line-number" data-line-number="229"/>
+        <td id="LC229" class="blob-code blob-code-inner js-file-line">									}</td>
+      </tr>
+      <tr>
+        <td id="L230" class="blob-num js-line-number" data-line-number="230"/>
+        <td id="LC230" class="blob-code blob-code-inner js-file-line">								}</td>
+      </tr>
+      <tr>
+        <td id="L231" class="blob-num js-line-number" data-line-number="231"/>
+        <td id="LC231" class="blob-code blob-code-inner js-file-line">							}</td>
+      </tr>
+      <tr>
+        <td id="L232" class="blob-num js-line-number" data-line-number="232"/>
+        <td id="LC232" class="blob-code blob-code-inner js-file-line">						} <span class="pl-k">else</span> <span class="pl-k">if</span> (mapping<span class="pl-k">.</span>checkType(name) <span class="pl-k">==</span> <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>LONG</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L233" class="blob-num js-line-number" data-line-number="233"/>
+        <td id="LC233" class="blob-code blob-code-inner js-file-line">							doc<span class="pl-k">.</span>remove(name);</td>
+      </tr>
+      <tr>
+        <td id="L234" class="blob-num js-line-number" data-line-number="234"/>
+        <td id="LC234" class="blob-code blob-code-inner js-file-line">							<span class="pl-k">for</span> (<span class="pl-smi">Object</span> o <span class="pl-k">:</span> values) {</td>
+      </tr>
+      <tr>
+        <td id="L235" class="blob-num js-line-number" data-line-number="235"/>
+        <td id="LC235" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">if</span> ((o <span class="pl-k">instanceof</span> <span class="pl-smi">Number</span>))</td>
+      </tr>
+      <tr>
+        <td id="L236" class="blob-num js-line-number" data-line-number="236"/>
+        <td id="LC236" class="blob-code blob-code-inner js-file-line">									doc<span class="pl-k">.</span>addField(name, <span class="pl-smi">Long</span><span class="pl-k">.</span>valueOf(((<span class="pl-smi">Number</span>) o)<span class="pl-k">.</span>longValue()));</td>
+      </tr>
+      <tr>
+        <td id="L237" class="blob-num js-line-number" data-line-number="237"/>
+        <td id="LC237" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L238" class="blob-num js-line-number" data-line-number="238"/>
+        <td id="LC238" class="blob-code blob-code-inner js-file-line">									<span class="pl-k">try</span> {</td>
+      </tr>
+      <tr>
+        <td id="L239" class="blob-num js-line-number" data-line-number="239"/>
+        <td id="LC239" class="blob-code blob-code-inner js-file-line">										<span class="pl-smi">Double</span> <span class="pl-smi">D</span> <span class="pl-k">=</span> <span class="pl-smi">Double</span><span class="pl-k">.</span>valueOf(<span class="pl-smi">Double</span><span class="pl-k">.</span>parseDouble(<span class="pl-smi">String</span><span class="pl-k">.</span>valueOf(o)));</td>
+      </tr>
+      <tr>
+        <td id="L240" class="blob-num js-line-number" data-line-number="240"/>
+        <td id="LC240" class="blob-code blob-code-inner js-file-line">										doc<span class="pl-k">.</span>addField(name, <span class="pl-smi">Long</span><span class="pl-k">.</span>valueOf(<span class="pl-smi">D</span><span class="pl-k">.</span>longValue()));</td>
+      </tr>
+      <tr>
+        <td id="L241" class="blob-num js-line-number" data-line-number="241"/>
+        <td id="LC241" class="blob-code blob-code-inner js-file-line">									} <span class="pl-k">catch</span> (<span class="pl-smi">Exception</span> e) {</td>
+      </tr>
+      <tr>
+        <td id="L242" class="blob-num js-line-number" data-line-number="242"/>
+        <td id="LC242" class="blob-code blob-code-inner js-file-line">										<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>Invalid long in field <span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(name)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>: '<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(o)</td>
+      </tr>
+      <tr>
+        <td id="L243" class="blob-num js-line-number" data-line-number="243"/>
+        <td id="LC243" class="blob-code blob-code-inner js-file-line">												.append(<span class="pl-s"><span class="pl-pds">"</span>' removed.<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L244" class="blob-num js-line-number" data-line-number="244"/>
+        <td id="LC244" class="blob-code blob-code-inner js-file-line">									}</td>
+      </tr>
+      <tr>
+        <td id="L245" class="blob-num js-line-number" data-line-number="245"/>
+        <td id="LC245" class="blob-code blob-code-inner js-file-line">								}</td>
+      </tr>
+      <tr>
+        <td id="L246" class="blob-num js-line-number" data-line-number="246"/>
+        <td id="LC246" class="blob-code blob-code-inner js-file-line">							}</td>
+      </tr>
+      <tr>
+        <td id="L247" class="blob-num js-line-number" data-line-number="247"/>
+        <td id="LC247" class="blob-code blob-code-inner js-file-line">						}</td>
+      </tr>
+      <tr>
+        <td id="L248" class="blob-num js-line-number" data-line-number="248"/>
+        <td id="LC248" class="blob-code blob-code-inner js-file-line">						<span class="pl-k">if</span> ((mapping<span class="pl-k">.</span>isMultivalued(name) <span class="pl-k">!=</span> <span class="pl-c1">null</span>) <span class="pl-k">&amp;&amp;</span> (<span class="pl-k">!</span>mapping<span class="pl-k">.</span>isMultivalued(name)<span class="pl-k">.</span>booleanValue())</td>
+      </tr>
+      <tr>
+        <td id="L249" class="blob-num js-line-number" data-line-number="249"/>
+        <td id="LC249" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">&amp;&amp;</span> (values<span class="pl-k">.</span>size() <span class="pl-k">&gt;</span> <span class="pl-c1">1</span>)) {</td>
+      </tr>
+      <tr>
+        <td id="L250" class="blob-num js-line-number" data-line-number="250"/>
+        <td id="LC250" class="blob-code blob-code-inner js-file-line">							doc<span class="pl-k">.</span>remove(name);</td>
+      </tr>
+      <tr>
+        <td id="L251" class="blob-num js-line-number" data-line-number="251"/>
+        <td id="LC251" class="blob-code blob-code-inner js-file-line">							<span class="pl-k">if</span> (mapping<span class="pl-k">.</span>checkType(name) <span class="pl-k">==</span> <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span><span class="pl-smi">FType</span><span class="pl-c1"><span class="pl-k">.</span>STRING</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L252" class="blob-num js-line-number" data-line-number="252"/>
+        <td id="LC252" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">LinkedHashSet&lt;<span class="pl-smi">String</span>&gt;</span> uniq <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">LinkedHashSet&lt;<span class="pl-smi">String</span>&gt;</span>(values<span class="pl-k">.</span>size());</td>
+      </tr>
+      <tr>
+        <td id="L253" class="blob-num js-line-number" data-line-number="253"/>
+        <td id="LC253" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">for</span> (<span class="pl-smi">Object</span> o <span class="pl-k">:</span> values) {</td>
+      </tr>
+      <tr>
+        <td id="L254" class="blob-num js-line-number" data-line-number="254"/>
+        <td id="LC254" class="blob-code blob-code-inner js-file-line">									uniq<span class="pl-k">.</span>add(o<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L255" class="blob-num js-line-number" data-line-number="255"/>
+        <td id="LC255" class="blob-code blob-code-inner js-file-line">								}</td>
+      </tr>
+      <tr>
+        <td id="L256" class="blob-num js-line-number" data-line-number="256"/>
+        <td id="LC256" class="blob-code blob-code-inner js-file-line">								<span class="pl-smi">StringBuilder</span> sb <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>();</td>
+      </tr>
+      <tr>
+        <td id="L257" class="blob-num js-line-number" data-line-number="257"/>
+        <td id="LC257" class="blob-code blob-code-inner js-file-line">								<span class="pl-k">for</span> (<span class="pl-smi">String</span> s <span class="pl-k">:</span> uniq) {</td>
+      </tr>
+      <tr>
+        <td id="L258" class="blob-num js-line-number" data-line-number="258"/>
+        <td id="LC258" class="blob-code blob-code-inner js-file-line">									<span class="pl-k">if</span> (sb<span class="pl-k">.</span>length() <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>)</td>
+      </tr>
+      <tr>
+        <td id="L259" class="blob-num js-line-number" data-line-number="259"/>
+        <td id="LC259" class="blob-code blob-code-inner js-file-line">										sb<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L260" class="blob-num js-line-number" data-line-number="260"/>
+        <td id="LC260" class="blob-code blob-code-inner js-file-line">									sb<span class="pl-k">.</span>append(s);</td>
+      </tr>
+      <tr>
+        <td id="L261" class="blob-num js-line-number" data-line-number="261"/>
+        <td id="LC261" class="blob-code blob-code-inner js-file-line">								}</td>
+      </tr>
+      <tr>
+        <td id="L262" class="blob-num js-line-number" data-line-number="262"/>
+        <td id="LC262" class="blob-code blob-code-inner js-file-line">								doc<span class="pl-k">.</span>setField(name, sb<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L263" class="blob-num js-line-number" data-line-number="263"/>
+        <td id="LC263" class="blob-code blob-code-inner js-file-line">							} <span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L264" class="blob-num js-line-number" data-line-number="264"/>
+        <td id="LC264" class="blob-code blob-code-inner js-file-line">								doc<span class="pl-k">.</span>setField(name, values<span class="pl-k">.</span>iterator()<span class="pl-k">.</span>next());</td>
+      </tr>
+      <tr>
+        <td id="L265" class="blob-num js-line-number" data-line-number="265"/>
+        <td id="LC265" class="blob-code blob-code-inner js-file-line">							}</td>
+      </tr>
+      <tr>
+        <td id="L266" class="blob-num js-line-number" data-line-number="266"/>
+        <td id="LC266" class="blob-code blob-code-inner js-file-line">						}</td>
+      </tr>
+      <tr>
+        <td id="L267" class="blob-num js-line-number" data-line-number="267"/>
+        <td id="LC267" class="blob-code blob-code-inner js-file-line">					}</td>
+      </tr>
+      <tr>
+        <td id="L268" class="blob-num js-line-number" data-line-number="268"/>
+        <td id="LC268" class="blob-code blob-code-inner js-file-line">				}</td>
+      </tr>
+      <tr>
+        <td id="L269" class="blob-num js-line-number" data-line-number="269"/>
+        <td id="LC269" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L270" class="blob-num js-line-number" data-line-number="270"/>
+        <td id="LC270" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> uniqueKey <span class="pl-k">=</span> mapping<span class="pl-k">.</span>getUniqueKey();</td>
+      </tr>
+      <tr>
+        <td id="L271" class="blob-num js-line-number" data-line-number="271"/>
+        <td id="LC271" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (uniqueKey <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L272" class="blob-num js-line-number" data-line-number="272"/>
+        <td id="LC272" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">Collection&lt;<span class="pl-smi">Object</span>&gt;</span> vals <span class="pl-k">=</span> doc<span class="pl-k">.</span>getFieldValues(uniqueKey);</td>
+      </tr>
+      <tr>
+        <td id="L273" class="blob-num js-line-number" data-line-number="273"/>
+        <td id="LC273" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> ((vals <span class="pl-k">!=</span> <span class="pl-c1">null</span>) <span class="pl-k">&amp;&amp;</span> (vals<span class="pl-k">.</span>size() <span class="pl-k">!=</span> <span class="pl-c1">0</span>)) {</td>
+      </tr>
+      <tr>
+        <td id="L274" class="blob-num js-line-number" data-line-number="274"/>
+        <td id="LC274" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">if</span> (vals<span class="pl-k">.</span>size() <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L275" class="blob-num js-line-number" data-line-number="275"/>
+        <td id="LC275" class="blob-code blob-code-inner js-file-line">					<span class="pl-smi">Object</span> id <span class="pl-k">=</span> <span class="pl-c1">null</span>;</td>
+      </tr>
+      <tr>
+        <td id="L276" class="blob-num js-line-number" data-line-number="276"/>
+        <td id="LC276" class="blob-code blob-code-inner js-file-line">					<span class="pl-k">for</span> (<span class="pl-smi">Object</span> i <span class="pl-k">:</span> vals) {</td>
+      </tr>
+      <tr>
+        <td id="L277" class="blob-num js-line-number" data-line-number="277"/>
+        <td id="LC277" class="blob-code blob-code-inner js-file-line">						id <span class="pl-k">=</span> i;</td>
+      </tr>
+      <tr>
+        <td id="L278" class="blob-num js-line-number" data-line-number="278"/>
+        <td id="LC278" class="blob-code blob-code-inner js-file-line">					}</td>
+      </tr>
+      <tr>
+        <td id="L279" class="blob-num js-line-number" data-line-number="279"/>
+        <td id="LC279" class="blob-code blob-code-inner js-file-line">					doc<span class="pl-k">.</span>remove(uniqueKey);</td>
+      </tr>
+      <tr>
+        <td id="L280" class="blob-num js-line-number" data-line-number="280"/>
+        <td id="LC280" class="blob-code blob-code-inner js-file-line">					doc<span class="pl-k">.</span>addField(uniqueKey, id);</td>
+      </tr>
+      <tr>
+        <td id="L281" class="blob-num js-line-number" data-line-number="281"/>
+        <td id="LC281" class="blob-code blob-code-inner js-file-line">				}</td>
+      </tr>
+      <tr>
+        <td id="L282" class="blob-num js-line-number" data-line-number="282"/>
+        <td id="LC282" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L283" class="blob-num js-line-number" data-line-number="283"/>
+        <td id="LC283" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L284" class="blob-num js-line-number" data-line-number="284"/>
+        <td id="LC284" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L285" class="blob-num js-line-number" data-line-number="285"/>
+        <td id="LC285" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L286" class="blob-num js-line-number" data-line-number="286"/>
+        <td id="LC286" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">addGaiaSearchFields</span>(<span class="pl-smi">FieldMapping</span> <span class="pl-v">template</span>, <span class="pl-smi">DataSourceAPI</span> <span class="pl-v">ds</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L287" class="blob-num js-line-number" data-line-number="287"/>
+        <td id="LC287" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">FieldMapping</span> src <span class="pl-k">=</span> ds<span class="pl-k">.</span>getFieldMapping();</td>
+      </tr>
+      <tr>
+        <td id="L288" class="blob-num js-line-number" data-line-number="288"/>
+        <td id="LC288" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> dataSourceField <span class="pl-k">=</span> src <span class="pl-k">!=</span> <span class="pl-c1">null</span> <span class="pl-k">?</span> src<span class="pl-k">.</span>getDatasourceField() <span class="pl-k">:</span> emptyMapping<span class="pl-k">.</span>getDatasourceField();</td>
+      </tr>
+      <tr>
+        <td id="L289" class="blob-num js-line-number" data-line-number="289"/>
+        <td id="LC289" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (dataSourceField <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L290" class="blob-num js-line-number" data-line-number="290"/>
+        <td id="LC290" class="blob-code blob-code-inner js-file-line">			<span class="pl-c1">LOG</span><span class="pl-k">.</span>warn(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()</td>
+      </tr>
+      <tr>
+        <td id="L291" class="blob-num js-line-number" data-line-number="291"/>
+        <td id="LC291" class="blob-code blob-code-inner js-file-line">					.append(<span class="pl-s"><span class="pl-pds">"</span>addGaiaworksFields is true, but dataSourceField is null ??? replacing with <span class="pl-pds">"</span></span>)</td>
+      </tr>
+      <tr>
+        <td id="L292" class="blob-num js-line-number" data-line-number="292"/>
+        <td id="LC292" class="blob-code blob-code-inner js-file-line">					.append(emptyMapping<span class="pl-k">.</span>getDatasourceField())<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L293" class="blob-num js-line-number" data-line-number="293"/>
+        <td id="LC293" class="blob-code blob-code-inner js-file-line">			dataSourceField <span class="pl-k">=</span> emptyMapping<span class="pl-k">.</span>getDatasourceField();</td>
+      </tr>
+      <tr>
+        <td id="L294" class="blob-num js-line-number" data-line-number="294"/>
+        <td id="LC294" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L295" class="blob-num js-line-number" data-line-number="295"/>
+        <td id="LC295" class="blob-code blob-code-inner js-file-line">		template<span class="pl-k">.</span>setLiteral(dataSourceField, ds<span class="pl-k">.</span>getDataSourceId()<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L296" class="blob-num js-line-number" data-line-number="296"/>
+        <td id="LC296" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> type <span class="pl-k">=</span> ds<span class="pl-k">.</span>getCategory();</td>
+      </tr>
+      <tr>
+        <td id="L297" class="blob-num js-line-number" data-line-number="297"/>
+        <td id="LC297" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (type <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L298" class="blob-num js-line-number" data-line-number="298"/>
+        <td id="LC298" class="blob-code blob-code-inner js-file-line">			type <span class="pl-k">=</span> (<span class="pl-smi">String</span>) ds<span class="pl-k">.</span>getProperty(<span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L299" class="blob-num js-line-number" data-line-number="299"/>
+        <td id="LC299" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L300" class="blob-num js-line-number" data-line-number="300"/>
+        <td id="LC300" class="blob-code blob-code-inner js-file-line">		template<span class="pl-k">.</span>setLiteral(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(dataSourceField)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>_type<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString(), type);</td>
+      </tr>
+      <tr>
+        <td id="L301" class="blob-num js-line-number" data-line-number="301"/>
+        <td id="LC301" class="blob-code blob-code-inner js-file-line">		template<span class="pl-k">.</span>setLiteral(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(dataSourceField)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>_name<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString(), ds<span class="pl-k">.</span>getDisplayName());</td>
+      </tr>
+      <tr>
+        <td id="L302" class="blob-num js-line-number" data-line-number="302"/>
+        <td id="LC302" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L303" class="blob-num js-line-number" data-line-number="303"/>
+        <td id="LC303" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L304" class="blob-num js-line-number" data-line-number="304"/>
+        <td id="LC304" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">ensureGaiaFields</span>(<span class="pl-smi">SolrInputDocument</span> <span class="pl-v">doc</span>, <span class="pl-smi">DataSourceAPI</span> <span class="pl-v">ds</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L305" class="blob-num js-line-number" data-line-number="305"/>
+        <td id="LC305" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">FieldMapping</span> mapping <span class="pl-k">=</span> ds<span class="pl-k">.</span>getFieldMapping();</td>
+      </tr>
+      <tr>
+        <td id="L306" class="blob-num js-line-number" data-line-number="306"/>
+        <td id="LC306" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (mapping <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L307" class="blob-num js-line-number" data-line-number="307"/>
+        <td id="LC307" class="blob-code blob-code-inner js-file-line">			mapping <span class="pl-k">=</span> emptyMapping;</td>
+      </tr>
+      <tr>
+        <td id="L308" class="blob-num js-line-number" data-line-number="308"/>
+        <td id="LC308" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L309" class="blob-num js-line-number" data-line-number="309"/>
+        <td id="LC309" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L310" class="blob-num js-line-number" data-line-number="310"/>
+        <td id="LC310" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (doc<span class="pl-k">.</span>getField(mapping<span class="pl-k">.</span>getDatasourceField()) <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L311" class="blob-num js-line-number" data-line-number="311"/>
+        <td id="LC311" class="blob-code blob-code-inner js-file-line">			doc<span class="pl-k">.</span>addField(mapping<span class="pl-k">.</span>getDatasourceField(), ds<span class="pl-k">.</span>getDataSourceId()<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L312" class="blob-num js-line-number" data-line-number="312"/>
+        <td id="LC312" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L313" class="blob-num js-line-number" data-line-number="313"/>
+        <td id="LC313" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L314" class="blob-num js-line-number" data-line-number="314"/>
+        <td id="LC314" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> typeField <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(mapping<span class="pl-k">.</span>getDatasourceField())<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>_type<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString();</td>
+      </tr>
+      <tr>
+        <td id="L315" class="blob-num js-line-number" data-line-number="315"/>
+        <td id="LC315" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (doc<span class="pl-k">.</span>getField(typeField) <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L316" class="blob-num js-line-number" data-line-number="316"/>
+        <td id="LC316" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (ds<span class="pl-k">.</span>getCategory() <span class="pl-k">!=</span> <span class="pl-c1">null</span>)</td>
+      </tr>
+      <tr>
+        <td id="L317" class="blob-num js-line-number" data-line-number="317"/>
+        <td id="LC317" class="blob-code blob-code-inner js-file-line">				doc<span class="pl-k">.</span>addField(typeField, ds<span class="pl-k">.</span>getCategory());</td>
+      </tr>
+      <tr>
+        <td id="L318" class="blob-num js-line-number" data-line-number="318"/>
+        <td id="LC318" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">else</span> {</td>
+      </tr>
+      <tr>
+        <td id="L319" class="blob-num js-line-number" data-line-number="319"/>
+        <td id="LC319" class="blob-code blob-code-inner js-file-line">				doc<span class="pl-k">.</span>addField(typeField, ds<span class="pl-k">.</span>getProperty(<span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>));</td>
+      </tr>
+      <tr>
+        <td id="L320" class="blob-num js-line-number" data-line-number="320"/>
+        <td id="LC320" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L321" class="blob-num js-line-number" data-line-number="321"/>
+        <td id="LC321" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L322" class="blob-num js-line-number" data-line-number="322"/>
+        <td id="LC322" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L323" class="blob-num js-line-number" data-line-number="323"/>
+        <td id="LC323" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> nameField <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(mapping<span class="pl-k">.</span>getDatasourceField())<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>_name<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString();</td>
+      </tr>
+      <tr>
+        <td id="L324" class="blob-num js-line-number" data-line-number="324"/>
+        <td id="LC324" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (doc<span class="pl-k">.</span>getField(nameField) <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L325" class="blob-num js-line-number" data-line-number="325"/>
+        <td id="LC325" class="blob-code blob-code-inner js-file-line">			doc<span class="pl-k">.</span>addField(nameField, ds<span class="pl-k">.</span>getDisplayName());</td>
+      </tr>
+      <tr>
+        <td id="L326" class="blob-num js-line-number" data-line-number="326"/>
+        <td id="LC326" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L327" class="blob-num js-line-number" data-line-number="327"/>
+        <td id="LC327" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L328" class="blob-num js-line-number" data-line-number="328"/>
+        <td id="LC328" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> lastModified <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>lastModified<span class="pl-pds">"</span></span>;</td>
+      </tr>
+      <tr>
+        <td id="L329" class="blob-num js-line-number" data-line-number="329"/>
+        <td id="LC329" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (doc<span class="pl-k">.</span>getField(lastModified) <span class="pl-k">==</span> <span class="pl-c1">null</span>)</td>
+      </tr>
+      <tr>
+        <td id="L330" class="blob-num js-line-number" data-line-number="330"/>
+        <td id="LC330" class="blob-code blob-code-inner js-file-line">			doc<span class="pl-k">.</span>addField(lastModified, <span class="pl-k">new</span> <span class="pl-smi">Date</span>());</td>
+      </tr>
+      <tr>
+        <td id="L331" class="blob-num js-line-number" data-line-number="331"/>
+        <td id="LC331" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L332" class="blob-num js-line-number" data-line-number="332"/>
+        <td id="LC332" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L333" class="blob-num js-line-number" data-line-number="333"/>
+        <td id="LC333" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">generateUniqueKey</span>(<span class="pl-smi">SolrInputDocument</span> <span class="pl-v">doc</span>, <span class="pl-smi">String</span> <span class="pl-v">uniqueKey</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L334" class="blob-num js-line-number" data-line-number="334"/>
+        <td id="LC334" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (doc<span class="pl-k">.</span>getField(uniqueKey) <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L335" class="blob-num js-line-number" data-line-number="335"/>
+        <td id="LC335" class="blob-code blob-code-inner js-file-line">			<span class="pl-smi">UUID</span> uuid <span class="pl-k">=</span> <span class="pl-c1">UUID</span><span class="pl-k">.</span>randomUUID();</td>
+      </tr>
+      <tr>
+        <td id="L336" class="blob-num js-line-number" data-line-number="336"/>
+        <td id="LC336" class="blob-code blob-code-inner js-file-line">			doc<span class="pl-k">.</span>addField(uniqueKey, uuid<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L337" class="blob-num js-line-number" data-line-number="337"/>
+        <td id="LC337" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L338" class="blob-num js-line-number" data-line-number="338"/>
+        <td id="LC338" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L339" class="blob-num js-line-number" data-line-number="339"/>
+        <td id="LC339" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L340" class="blob-num js-line-number" data-line-number="340"/>
+        <td id="LC340" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-smi">String</span> <span class="pl-en">map</span>(<span class="pl-smi">String</span> <span class="pl-v">name</span>, <span class="pl-smi">FieldMapping</span> <span class="pl-v">mapping</span>, <span class="pl-smi">IndexSchema</span> <span class="pl-v">schema</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L341" class="blob-num js-line-number" data-line-number="341"/>
+        <td id="LC341" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> key <span class="pl-k">=</span> name<span class="pl-k">.</span>toLowerCase();</td>
+      </tr>
+      <tr>
+        <td id="L342" class="blob-num js-line-number" data-line-number="342"/>
+        <td id="LC342" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (mapping <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L343" class="blob-num js-line-number" data-line-number="343"/>
+        <td id="LC343" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">String</span>&gt;</span> mappings <span class="pl-k">=</span> mapping<span class="pl-k">.</span>getMappings();</td>
+      </tr>
+      <tr>
+        <td id="L344" class="blob-num js-line-number" data-line-number="344"/>
+        <td id="LC344" class="blob-code blob-code-inner js-file-line">			<span class="pl-smi">String</span> res <span class="pl-k">=</span> (<span class="pl-smi">String</span>) mappings<span class="pl-k">.</span>get(key);</td>
+      </tr>
+      <tr>
+        <td id="L345" class="blob-num js-line-number" data-line-number="345"/>
+        <td id="LC345" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (mappings<span class="pl-k">.</span>containsKey(key)) {</td>
+      </tr>
+      <tr>
+        <td id="L346" class="blob-num js-line-number" data-line-number="346"/>
+        <td id="LC346" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">if</span> (<span class="pl-smi">StringUtils</span><span class="pl-k">.</span>isBlank(res)) {</td>
+      </tr>
+      <tr>
+        <td id="L347" class="blob-num js-line-number" data-line-number="347"/>
+        <td id="LC347" class="blob-code blob-code-inner js-file-line">					<span class="pl-k">return</span> <span class="pl-c1">null</span>;</td>
+      </tr>
+      <tr>
+        <td id="L348" class="blob-num js-line-number" data-line-number="348"/>
+        <td id="LC348" class="blob-code blob-code-inner js-file-line">				}</td>
+      </tr>
+      <tr>
+        <td id="L349" class="blob-num js-line-number" data-line-number="349"/>
+        <td id="LC349" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">return</span> res;</td>
+      </tr>
+      <tr>
+        <td id="L350" class="blob-num js-line-number" data-line-number="350"/>
+        <td id="LC350" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L351" class="blob-num js-line-number" data-line-number="351"/>
+        <td id="LC351" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L352" class="blob-num js-line-number" data-line-number="352"/>
+        <td id="LC352" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (schema <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L353" class="blob-num js-line-number" data-line-number="353"/>
+        <td id="LC353" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (schema<span class="pl-k">.</span>getFieldOrNull(name) <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L354" class="blob-num js-line-number" data-line-number="354"/>
+        <td id="LC354" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">return</span> name;</td>
+      </tr>
+      <tr>
+        <td id="L355" class="blob-num js-line-number" data-line-number="355"/>
+        <td id="LC355" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L356" class="blob-num js-line-number" data-line-number="356"/>
+        <td id="LC356" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L357" class="blob-num js-line-number" data-line-number="357"/>
+        <td id="LC357" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (mapping <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L358" class="blob-num js-line-number" data-line-number="358"/>
+        <td id="LC358" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (mapping<span class="pl-k">.</span>getDynamicField() <span class="pl-k">!=</span> <span class="pl-c1">null</span>)</td>
+      </tr>
+      <tr>
+        <td id="L359" class="blob-num js-line-number" data-line-number="359"/>
+        <td id="LC359" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">return</span> toDynamic(name, mapping<span class="pl-k">.</span>getDynamicField());</td>
+      </tr>
+      <tr>
+        <td id="L360" class="blob-num js-line-number" data-line-number="360"/>
+        <td id="LC360" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> (mapping<span class="pl-k">.</span>getDefaultField() <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L361" class="blob-num js-line-number" data-line-number="361"/>
+        <td id="LC361" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">return</span> mapping<span class="pl-k">.</span>getDefaultField();</td>
+      </tr>
+      <tr>
+        <td id="L362" class="blob-num js-line-number" data-line-number="362"/>
+        <td id="LC362" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L363" class="blob-num js-line-number" data-line-number="363"/>
+        <td id="LC363" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L364" class="blob-num js-line-number" data-line-number="364"/>
+        <td id="LC364" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">return</span> name;</td>
+      </tr>
+      <tr>
+        <td id="L365" class="blob-num js-line-number" data-line-number="365"/>
+        <td id="LC365" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L366" class="blob-num js-line-number" data-line-number="366"/>
+        <td id="LC366" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L367" class="blob-num js-line-number" data-line-number="367"/>
+        <td id="LC367" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-smi">String</span> <span class="pl-en">toDynamic</span>(<span class="pl-smi">String</span> <span class="pl-v">name</span>, <span class="pl-smi">String</span> <span class="pl-v">dynamicPrefix</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L368" class="blob-num js-line-number" data-line-number="368"/>
+        <td id="LC368" class="blob-code blob-code-inner js-file-line">		name <span class="pl-k">=</span> name<span class="pl-k">.</span>trim()<span class="pl-k">.</span>replaceAll(<span class="pl-s"><span class="pl-pds">"</span>[<span class="pl-cce">\\</span>W]<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toLowerCase();</td>
+      </tr>
+      <tr>
+        <td id="L369" class="blob-num js-line-number" data-line-number="369"/>
+        <td id="LC369" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(dynamicPrefix)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(name)<span class="pl-k">.</span>toString();</td>
+      </tr>
+      <tr>
+        <td id="L370" class="blob-num js-line-number" data-line-number="370"/>
+        <td id="LC370" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L371" class="blob-num js-line-number" data-line-number="371"/>
+        <td id="LC371" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L372" class="blob-num js-line-number" data-line-number="372"/>
+        <td id="LC372" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">mapFields</span>(<span class="pl-smi">SolrInputDocument</span> <span class="pl-v">doc</span>, <span class="pl-smi">FieldMapping</span> <span class="pl-v">mapping</span>, <span class="pl-smi">IndexSchema</span> <span class="pl-v">schema</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L373" class="blob-num js-line-number" data-line-number="373"/>
+        <td id="LC373" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">HashSet&lt;<span class="pl-smi">String</span>&gt;</span> fieldNames <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">HashSet&lt;<span class="pl-smi">String</span>&gt;</span>(doc<span class="pl-k">.</span>getFieldNames());</td>
+      </tr>
+      <tr>
+        <td id="L374" class="blob-num js-line-number" data-line-number="374"/>
+        <td id="LC374" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (mapping <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L375" class="blob-num js-line-number" data-line-number="375"/>
+        <td id="LC375" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">return</span>;</td>
+      </tr>
+      <tr>
+        <td id="L376" class="blob-num js-line-number" data-line-number="376"/>
+        <td id="LC376" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L377" class="blob-num js-line-number" data-line-number="377"/>
+        <td id="LC377" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">for</span> (<span class="pl-smi">String</span> sourceName <span class="pl-k">:</span> fieldNames) {</td>
+      </tr>
+      <tr>
+        <td id="L378" class="blob-num js-line-number" data-line-number="378"/>
+        <td id="LC378" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">if</span> ((<span class="pl-k">!</span>sourceName<span class="pl-k">.</span>equals(mapping<span class="pl-k">.</span>getUniqueKey()))</td>
+      </tr>
+      <tr>
+        <td id="L379" class="blob-num js-line-number" data-line-number="379"/>
+        <td id="LC379" class="blob-code blob-code-inner js-file-line">					<span class="pl-k">&amp;&amp;</span> ((<span class="pl-k">!</span>sourceName<span class="pl-k">.</span>equals(<span class="pl-s"><span class="pl-pds">"</span>_version_<span class="pl-pds">"</span></span>)) <span class="pl-k">||</span> (mapping<span class="pl-k">.</span>getMappings()<span class="pl-k">.</span>containsKey(<span class="pl-s"><span class="pl-pds">"</span>_version_<span class="pl-pds">"</span></span>)))) {</td>
+      </tr>
+      <tr>
+        <td id="L380" class="blob-num js-line-number" data-line-number="380"/>
+        <td id="LC380" class="blob-code blob-code-inner js-file-line">				<span class="pl-smi">String</span> targetFieldName <span class="pl-k">=</span> map(sourceName, mapping, schema);</td>
+      </tr>
+      <tr>
+        <td id="L381" class="blob-num js-line-number" data-line-number="381"/>
+        <td id="LC381" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">if</span> (targetFieldName <span class="pl-k">==</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L382" class="blob-num js-line-number" data-line-number="382"/>
+        <td id="LC382" class="blob-code blob-code-inner js-file-line">					doc<span class="pl-k">.</span>removeField(sourceName);</td>
+      </tr>
+      <tr>
+        <td id="L383" class="blob-num js-line-number" data-line-number="383"/>
+        <td id="LC383" class="blob-code blob-code-inner js-file-line">				} <span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-k">!</span>targetFieldName<span class="pl-k">.</span>equals(sourceName)) {</td>
+      </tr>
+      <tr>
+        <td id="L384" class="blob-num js-line-number" data-line-number="384"/>
+        <td id="LC384" class="blob-code blob-code-inner js-file-line">					<span class="pl-k">Collection&lt;<span class="pl-smi">Object</span>&gt;</span> values <span class="pl-k">=</span> doc<span class="pl-k">.</span>getFieldValues(sourceName);</td>
+      </tr>
+      <tr>
+        <td id="L385" class="blob-num js-line-number" data-line-number="385"/>
+        <td id="LC385" class="blob-code blob-code-inner js-file-line">					doc<span class="pl-k">.</span>removeField(sourceName);</td>
+      </tr>
+      <tr>
+        <td id="L386" class="blob-num js-line-number" data-line-number="386"/>
+        <td id="LC386" class="blob-code blob-code-inner js-file-line">					<span class="pl-k">if</span> (values <span class="pl-k">!=</span> <span class="pl-c1">null</span>)</td>
+      </tr>
+      <tr>
+        <td id="L387" class="blob-num js-line-number" data-line-number="387"/>
+        <td id="LC387" class="blob-code blob-code-inner js-file-line">						<span class="pl-k">for</span> (<span class="pl-smi">Object</span> obj <span class="pl-k">:</span> values) {</td>
+      </tr>
+      <tr>
+        <td id="L388" class="blob-num js-line-number" data-line-number="388"/>
+        <td id="LC388" class="blob-code blob-code-inner js-file-line">							doc<span class="pl-k">.</span>addField(targetFieldName, obj);</td>
+      </tr>
+      <tr>
+        <td id="L389" class="blob-num js-line-number" data-line-number="389"/>
+        <td id="LC389" class="blob-code blob-code-inner js-file-line">						}</td>
+      </tr>
+      <tr>
+        <td id="L390" class="blob-num js-line-number" data-line-number="390"/>
+        <td id="LC390" class="blob-code blob-code-inner js-file-line">				}</td>
+      </tr>
+      <tr>
+        <td id="L391" class="blob-num js-line-number" data-line-number="391"/>
+        <td id="LC391" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L392" class="blob-num js-line-number" data-line-number="392"/>
+        <td id="LC392" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L393" class="blob-num js-line-number" data-line-number="393"/>
+        <td id="LC393" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> dynamicField <span class="pl-k">=</span> mapping<span class="pl-k">.</span>getDynamicField() <span class="pl-k">!=</span> <span class="pl-c1">null</span> <span class="pl-k">?</span> mapping<span class="pl-k">.</span>getDynamicField() <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>attr<span class="pl-pds">"</span></span>;</td>
+      </tr>
+      <tr>
+        <td id="L394" class="blob-num js-line-number" data-line-number="394"/>
+        <td id="LC394" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> dynAuthor <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(dynamicField)<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>_author<span class="pl-pds">"</span></span>)<span class="pl-k">.</span>toString();</td>
+      </tr>
+      <tr>
+        <td id="L395" class="blob-num js-line-number" data-line-number="395"/>
+        <td id="LC395" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">String</span> mappedAuthor <span class="pl-k">=</span> map(<span class="pl-s"><span class="pl-pds">"</span>author<span class="pl-pds">"</span></span>, mapping, schema);</td>
+      </tr>
+      <tr>
+        <td id="L396" class="blob-num js-line-number" data-line-number="396"/>
+        <td id="LC396" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> ((<span class="pl-k">!</span>doc<span class="pl-k">.</span>containsKey(mappedAuthor)) <span class="pl-k">&amp;&amp;</span> (doc<span class="pl-k">.</span>containsKey(dynAuthor))) {</td>
+      </tr>
+      <tr>
+        <td id="L397" class="blob-num js-line-number" data-line-number="397"/>
+        <td id="LC397" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">for</span> (<span class="pl-smi">Object</span> value <span class="pl-k">:</span> doc<span class="pl-k">.</span>getFieldValues(dynAuthor)) {</td>
+      </tr>
+      <tr>
+        <td id="L398" class="blob-num js-line-number" data-line-number="398"/>
+        <td id="LC398" class="blob-code blob-code-inner js-file-line">				doc<span class="pl-k">.</span>addField(mappedAuthor, value);</td>
+      </tr>
+      <tr>
+        <td id="L399" class="blob-num js-line-number" data-line-number="399"/>
+        <td id="LC399" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L400" class="blob-num js-line-number" data-line-number="400"/>
+        <td id="LC400" class="blob-code blob-code-inner js-file-line">			doc<span class="pl-k">.</span>remove(dynAuthor);</td>
+      </tr>
+      <tr>
+        <td id="L401" class="blob-num js-line-number" data-line-number="401"/>
+        <td id="LC401" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L402" class="blob-num js-line-number" data-line-number="402"/>
+        <td id="LC402" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L403" class="blob-num js-line-number" data-line-number="403"/>
+        <td id="LC403" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L404" class="blob-num js-line-number" data-line-number="404"/>
+        <td id="LC404" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-smi">String</span> <span class="pl-en">toJSON</span>(<span class="pl-smi">FieldMapping</span> <span class="pl-v">mapping</span>) <span class="pl-k">throws</span> <span class="pl-smi">Exception</span> {</td>
+      </tr>
+      <tr>
+        <td id="L405" class="blob-num js-line-number" data-line-number="405"/>
+        <td id="LC405" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">LOG</span><span class="pl-k">.</span>info(<span class="pl-k">new</span> <span class="pl-smi">StringBuilder</span>()<span class="pl-k">.</span>append(<span class="pl-s"><span class="pl-pds">"</span>mapping: <span class="pl-pds">"</span></span>)<span class="pl-k">.</span>append(mapping)<span class="pl-k">.</span>toString());</td>
+      </tr>
+      <tr>
+        <td id="L406" class="blob-num js-line-number" data-line-number="406"/>
+        <td id="LC406" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">ObjectMapper</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">ObjectMapper</span>();</td>
+      </tr>
+      <tr>
+        <td id="L407" class="blob-num js-line-number" data-line-number="407"/>
+        <td id="LC407" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">StringWriter</span> sw <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">StringWriter</span>();</td>
+      </tr>
+      <tr>
+        <td id="L408" class="blob-num js-line-number" data-line-number="408"/>
+        <td id="LC408" class="blob-code blob-code-inner js-file-line">		mapper<span class="pl-k">.</span>writeValue(sw, mapping<span class="pl-k">.</span>toMap());</td>
+      </tr>
+      <tr>
+        <td id="L409" class="blob-num js-line-number" data-line-number="409"/>
+        <td id="LC409" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">return</span> sw<span class="pl-k">.</span>toString();</td>
+      </tr>
+      <tr>
+        <td id="L410" class="blob-num js-line-number" data-line-number="410"/>
+        <td id="LC410" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L411" class="blob-num js-line-number" data-line-number="411"/>
+        <td id="LC411" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L412" class="blob-num js-line-number" data-line-number="412"/>
+        <td id="LC412" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-smi">FieldMapping</span> <span class="pl-en">fromJSON</span>(<span class="pl-smi">Reader</span> <span class="pl-v">json</span>, <span class="pl-smi">FieldMapping</span> <span class="pl-v">template</span>) <span class="pl-k">throws</span> <span class="pl-smi">Exception</span> {</td>
+      </tr>
+      <tr>
+        <td id="L413" class="blob-num js-line-number" data-line-number="413"/>
+        <td id="LC413" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">ObjectMapper</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">ObjectMapper</span>();</td>
+      </tr>
+      <tr>
+        <td id="L414" class="blob-num js-line-number" data-line-number="414"/>
+        <td id="LC414" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Object</span>&gt;</span> map <span class="pl-k">=</span> (<span class="pl-smi">Map</span>) mapper<span class="pl-k">.</span>readValue(json, <span class="pl-smi">Map</span><span class="pl-k">.</span>class);</td>
+      </tr>
+      <tr>
+        <td id="L415" class="blob-num js-line-number" data-line-number="415"/>
+        <td id="LC415" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">FieldMapping</span> fmap <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">FieldMapping</span>();</td>
+      </tr>
+      <tr>
+        <td id="L416" class="blob-num js-line-number" data-line-number="416"/>
+        <td id="LC416" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">if</span> (template <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {</td>
+      </tr>
+      <tr>
+        <td id="L417" class="blob-num js-line-number" data-line-number="417"/>
+        <td id="LC417" class="blob-code blob-code-inner js-file-line">			fmap<span class="pl-k">.</span>setFrom(template, <span class="pl-c1">true</span>);</td>
+      </tr>
+      <tr>
+        <td id="L418" class="blob-num js-line-number" data-line-number="418"/>
+        <td id="LC418" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L419" class="blob-num js-line-number" data-line-number="419"/>
+        <td id="LC419" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">FieldMapping</span><span class="pl-k">.</span>fromMap(fmap, map);</td>
+      </tr>
+      <tr>
+        <td id="L420" class="blob-num js-line-number" data-line-number="420"/>
+        <td id="LC420" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">return</span> fmap;</td>
+      </tr>
+      <tr>
+        <td id="L421" class="blob-num js-line-number" data-line-number="421"/>
+        <td id="LC421" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L422" class="blob-num js-line-number" data-line-number="422"/>
+        <td id="LC422" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L423" class="blob-num js-line-number" data-line-number="423"/>
+        <td id="LC423" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-smi">String</span> <span class="pl-en">mappingsToJSON</span>(<span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span>&gt;</span> <span class="pl-v">mappings</span>) <span class="pl-k">throws</span> <span class="pl-smi">Exception</span> {</td>
+      </tr>
+      <tr>
+        <td id="L424" class="blob-num js-line-number" data-line-number="424"/>
+        <td id="LC424" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">ObjectMapper</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">ObjectMapper</span>();</td>
+      </tr>
+      <tr>
+        <td id="L425" class="blob-num js-line-number" data-line-number="425"/>
+        <td id="LC425" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">StringWriter</span> sw <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">StringWriter</span>();</td>
+      </tr>
+      <tr>
+        <td id="L426" class="blob-num js-line-number" data-line-number="426"/>
+        <td id="LC426" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Object</span>&gt;</span> map <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Object</span>&gt;</span>();</td>
+      </tr>
+      <tr>
+        <td id="L427" class="blob-num js-line-number" data-line-number="427"/>
+        <td id="LC427" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">for</span> (<span class="pl-smi">Map</span><span class="pl-k">.</span><span class="pl-k">Entry&lt;<span class="pl-smi">String</span>, <span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span>&gt;</span> e <span class="pl-k">:</span> mappings<span class="pl-k">.</span>entrySet()) {</td>
+      </tr>
+      <tr>
+        <td id="L428" class="blob-num js-line-number" data-line-number="428"/>
+        <td id="LC428" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Object</span>&gt;</span> m <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Object</span>&gt;</span>();</td>
+      </tr>
+      <tr>
+        <td id="L429" class="blob-num js-line-number" data-line-number="429"/>
+        <td id="LC429" class="blob-code blob-code-inner js-file-line">			map<span class="pl-k">.</span>put(e<span class="pl-k">.</span>getKey(), m);</td>
+      </tr>
+      <tr>
+        <td id="L430" class="blob-num js-line-number" data-line-number="430"/>
+        <td id="LC430" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">for</span> (<span class="pl-smi">Map</span><span class="pl-k">.</span><span class="pl-k">Entry&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span> em <span class="pl-k">:</span> e<span class="pl-k">.</span>getValue()<span class="pl-k">.</span>entrySet())</td>
+      </tr>
+      <tr>
+        <td id="L431" class="blob-num js-line-number" data-line-number="431"/>
+        <td id="LC431" class="blob-code blob-code-inner js-file-line">				m<span class="pl-k">.</span>put(em<span class="pl-k">.</span>getKey(), ((<span class="pl-smi">FieldMapping</span>) em<span class="pl-k">.</span>getValue())<span class="pl-k">.</span>toMap());</td>
+      </tr>
+      <tr>
+        <td id="L432" class="blob-num js-line-number" data-line-number="432"/>
+        <td id="LC432" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L433" class="blob-num js-line-number" data-line-number="433"/>
+        <td id="LC433" class="blob-code blob-code-inner js-file-line">		mapper<span class="pl-k">.</span>writeValue(sw, map);</td>
+      </tr>
+      <tr>
+        <td id="L434" class="blob-num js-line-number" data-line-number="434"/>
+        <td id="LC434" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">return</span> sw<span class="pl-k">.</span>toString();</td>
+      </tr>
+      <tr>
+        <td id="L435" class="blob-num js-line-number" data-line-number="435"/>
+        <td id="LC435" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L436" class="blob-num js-line-number" data-line-number="436"/>
+        <td id="LC436" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L437" class="blob-num js-line-number" data-line-number="437"/>
+        <td id="LC437" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span>&gt;</span> <span class="pl-en">mappingsFromJSON</span>(<span class="pl-smi">String</span> <span class="pl-v">json</span>) <span class="pl-k">throws</span> <span class="pl-smi">Exception</span> {</td>
+      </tr>
+      <tr>
+        <td id="L438" class="blob-num js-line-number" data-line-number="438"/>
+        <td id="LC438" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">ObjectMapper</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">ObjectMapper</span>();</td>
+      </tr>
+      <tr>
+        <td id="L439" class="blob-num js-line-number" data-line-number="439"/>
+        <td id="LC439" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Object</span>&gt;</span> map <span class="pl-k">=</span> (<span class="pl-smi">Map</span>) mapper<span class="pl-k">.</span>readValue(json, <span class="pl-smi">Map</span><span class="pl-k">.</span>class);</td>
+      </tr>
+      <tr>
+        <td id="L440" class="blob-num js-line-number" data-line-number="440"/>
+        <td id="LC440" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span>&gt;</span> mappings <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span>&gt;</span>();</td>
+      </tr>
+      <tr>
+        <td id="L441" class="blob-num js-line-number" data-line-number="441"/>
+        <td id="LC441" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">for</span> (<span class="pl-smi">Map</span><span class="pl-k">.</span><span class="pl-k">Entry&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Object</span>&gt;</span> e <span class="pl-k">:</span> map<span class="pl-k">.</span>entrySet()) {</td>
+      </tr>
+      <tr>
+        <td id="L442" class="blob-num js-line-number" data-line-number="442"/>
+        <td id="LC442" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span> perDs <span class="pl-k">=</span> (<span class="pl-smi">Map</span>) e<span class="pl-k">.</span>getValue();</td>
+      </tr>
+      <tr>
+        <td id="L443" class="blob-num js-line-number" data-line-number="443"/>
+        <td id="LC443" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span> perDsRes <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span>();</td>
+      </tr>
+      <tr>
+        <td id="L444" class="blob-num js-line-number" data-line-number="444"/>
+        <td id="LC444" class="blob-code blob-code-inner js-file-line">			mappings<span class="pl-k">.</span>put(e<span class="pl-k">.</span>getKey(), perDsRes);</td>
+      </tr>
+      <tr>
+        <td id="L445" class="blob-num js-line-number" data-line-number="445"/>
+        <td id="LC445" class="blob-code blob-code-inner js-file-line">			<span class="pl-k">for</span> (<span class="pl-smi">Map</span><span class="pl-k">.</span><span class="pl-k">Entry&lt;<span class="pl-smi">String</span>, <span class="pl-smi">FieldMapping</span>&gt;</span> em <span class="pl-k">:</span> perDs<span class="pl-k">.</span>entrySet()) {</td>
+      </tr>
+      <tr>
+        <td id="L446" class="blob-num js-line-number" data-line-number="446"/>
+        <td id="LC446" class="blob-code blob-code-inner js-file-line">				<span class="pl-k">Map&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Object</span>&gt;</span> mapping <span class="pl-k">=</span> (<span class="pl-smi">Map</span>) em<span class="pl-k">.</span>getValue();</td>
+      </tr>
+      <tr>
+        <td id="L447" class="blob-num js-line-number" data-line-number="447"/>
+        <td id="LC447" class="blob-code blob-code-inner js-file-line">				<span class="pl-smi">FieldMapping</span> fmap <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">FieldMapping</span>();</td>
+      </tr>
+      <tr>
+        <td id="L448" class="blob-num js-line-number" data-line-number="448"/>
+        <td id="LC448" class="blob-code blob-code-inner js-file-line">				<span class="pl-smi">FieldMapping</span><span class="pl-k">.</span>fromMap(fmap, mapping);</td>
+      </tr>
+      <tr>
+        <td id="L449" class="blob-num js-line-number" data-line-number="449"/>
+        <td id="LC449" class="blob-code blob-code-inner js-file-line">				perDsRes<span class="pl-k">.</span>put(em<span class="pl-k">.</span>getKey(), fmap);</td>
+      </tr>
+      <tr>
+        <td id="L450" class="blob-num js-line-number" data-line-number="450"/>
+        <td id="LC450" class="blob-code blob-code-inner js-file-line">			}</td>
+      </tr>
+      <tr>
+        <td id="L451" class="blob-num js-line-number" data-line-number="451"/>
+        <td id="LC451" class="blob-code blob-code-inner js-file-line">		}</td>
+      </tr>
+      <tr>
+        <td id="L452" class="blob-num js-line-number" data-line-number="452"/>
+        <td id="LC452" class="blob-code blob-code-inner js-file-line">		<span class="pl-k">return</span> mappings;</td>
+      </tr>
+      <tr>
+        <td id="L453" class="blob-num js-line-number" data-line-number="453"/>
+        <td id="LC453" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L454" class="blob-num js-line-number" data-line-number="454"/>
+        <td id="LC454" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L455" class="blob-num js-line-number" data-line-number="455"/>
+        <td id="LC455" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">static</span> {</td>
+      </tr>
+      <tr>
+        <td id="L456" class="blob-num js-line-number" data-line-number="456"/>
+        <td id="LC456" class="blob-code blob-code-inner js-file-line">		<span class="pl-smi">DateUtil</span><span class="pl-c1"><span class="pl-k">.</span>DEFAULT_DATE_FORMATS</span><span class="pl-k">.</span>add(<span class="pl-s"><span class="pl-pds">"</span>yyyy-MM-dd'T'HH:mm:ss.000'Z'<span class="pl-pds">"</span></span>);</td>
+      </tr>
+      <tr>
+        <td id="L457" class="blob-num js-line-number" data-line-number="457"/>
+        <td id="LC457" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L458" class="blob-num js-line-number" data-line-number="458"/>
+        <td id="LC458" class="blob-code blob-code-inner js-file-line">		defaultMapping <span class="pl-k">=</span> <span class="pl-smi">FieldMapping</span><span class="pl-k">.</span>defaultFieldMapping();</td>
+      </tr>
+      <tr>
+        <td id="L459" class="blob-num js-line-number" data-line-number="459"/>
+        <td id="LC459" class="blob-code blob-code-inner js-file-line">		apertureDefaultMapping <span class="pl-k">=</span> (<span class="pl-smi">FieldMapping</span>) <span class="pl-smi">Defaults</span><span class="pl-c1"><span class="pl-k">.</span>INSTANCE</span><span class="pl-k">.</span>getObject(<span class="pl-smi">Defaults</span><span class="pl-k">.</span><span class="pl-smi">Group</span><span class="pl-k">.</span>datasource,</td>
+      </tr>
+      <tr>
+        <td id="L460" class="blob-num js-line-number" data-line-number="460"/>
+        <td id="LC460" class="blob-code blob-code-inner js-file-line">				<span class="pl-smi">FieldMapping</span><span class="pl-c1"><span class="pl-k">.</span>MAPPING_APERTURE_KEY</span>, defaultMapping);</td>
+      </tr>
+      <tr>
+        <td id="L461" class="blob-num js-line-number" data-line-number="461"/>
+        <td id="LC461" class="blob-code blob-code-inner js-file-line">		tikaDefaultMapping <span class="pl-k">=</span> (<span class="pl-smi">FieldMapping</span>) <span class="pl-smi">Defaults</span><span class="pl-c1"><span class="pl-k">.</span>INSTANCE</span><span class="pl-k">.</span>getObject(<span class="pl-smi">Defaults</span><span class="pl-k">.</span><span class="pl-smi">Group</span><span class="pl-k">.</span>datasource,</td>
+      </tr>
+      <tr>
+        <td id="L462" class="blob-num js-line-number" data-line-number="462"/>
+        <td id="LC462" class="blob-code blob-code-inner js-file-line">				<span class="pl-smi">FieldMapping</span><span class="pl-c1"><span class="pl-k">.</span>MAPPING_TIKA_KEY</span>, defaultMapping);</td>
+      </tr>
+      <tr>
+        <td id="L463" class="blob-num js-line-number" data-line-number="463"/>
+        <td id="LC463" class="blob-code blob-code-inner js-file-line">	}</td>
+      </tr>
+      <tr>
+        <td id="L464" class="blob-num js-line-number" data-line-number="464"/>
+        <td id="LC464" class="blob-code blob-code-inner js-file-line">}</td>
+      </tr>
+</table>
+
+  <details class="details-reset details-overlay BlobToolbar position-absolute js-file-line-actions dropdown d-none" aria-hidden="true">
+    <summary class="btn-octicon ml-0 px-2 p-0 bg-white border border-gray-dark rounded-1" aria-label="Inline file action toolbar">
+      <svg class="octicon octicon-kebab-horizontal" viewbox="0 0 13 16" version="1.1" width="13" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM13 7.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg>
+    </summary>
+    <details-menu>
+      <ul class="BlobToolbar-dropdown dropdown-menu dropdown-menu-se mt-2" style="width:185px">
+        <li><clipboard-copy role="menuitem" class="dropdown-item" id="js-copy-lines" style="cursor:pointer;" data-original-text="Copy lines">Copy lines</clipboard-copy></li>
+        <li><clipboard-copy role="menuitem" class="dropdown-item" id="js-copy-permalink" style="cursor:pointer;" data-original-text="Copy permalink">Copy permalink</clipboard-copy></li>
+        <li><a class="dropdown-item js-update-url-with-hash" id="js-view-git-blame" role="menuitem" href="/whlee21/gaia/blame/9abcb86b7c2ffc33c39ec1cf66a25e9d2144aae0/gaia-shared/src/main/java/gaia/crawl/datasource/FieldMappingUtil.java">View git blame</a></li>
+          <li><a class="dropdown-item" id="js-new-issue" role="menuitem" href="/whlee21/gaia/issues/new">Reference in new issue</a></li>
+      </ul>
+    </details-menu>
+  </details>
+
+  </div>
+
+    

@@ -1,0 +1,6 @@
+userName|#|userWeight
+bee-fe|#|1
+maybe-why-not|#|1
+aladingdeng|#|1
+hack66|#|8
+StefanMallia|#|1

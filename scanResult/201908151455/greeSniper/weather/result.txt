@@ -1,0 +1,29 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+greeSniper|#|weather|#|Application.java-ddcad86891465411db56ac971f61b481.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|City.java-10cf949b72f6c43e98a8f3d0c53a2583.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|ZuulClientFallback.java-e1393eb86c250fe9da3aa218a52b3f6e.html|#|8|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|ZuulClient.java-56df3539c56d40073b92a1fc8f91076b.html|#|8|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|WeatherReportServiceImpl.java-8efa98ba86719e8cd9242ec71b4602ea.html|#|10|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|WeatherReportService.java-6e148125b23b66a7c5bc23dbf2e10408.html|#|6|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|WeatherDataClient.java-83aacf6a69c09b752db4dfffbf637a1b.html|#|6|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|CityClient.java-510b1675ba8b5246882af739c77bed51.html|#|6|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|Application.java-1f67371f55cc8b1597327e79b66ccecf.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|pom.xml-e8de3dc149c0fb0e861bb76a401b43d8.html|#|2|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|Yesterday.java-2d5ce2fcd0024518924ac3378542f4cd.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|Yesterday.java-de25dc3bb61f424db33f45b8fd510991.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|WeatherResponse.java-584b7ebf11059943250ed8945f0b1efc.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|WeatherResponse.java-5622e6950f4ce318cef5af229205365d.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|Weather.java-729c0ba881f2b40b1b06eff7ba198fa3.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|Weather.java-66e6e0ae582939d72fec45a8ad42c42f.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|Forecast.java-c8434b492884567a6a4dbf88e7fed329.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|Forecast.java-94e3c2b98d91df86ee426995f96adfee.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|WeatherDataServiceImpl.java-e0b3bcca07c6cd6238133b11e03ba9ba.html|#|7|#|gaiaworks , gaia , sa|#||#|
+greeSniper|#|weather|#|WeatherDataService.java-54717b8fc09ca83ca5366703168c2125.html|#|6|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|WeatherController.java-e1e409d72480e0f81f978c19bb223834.html|#|8|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|City.java-0e8eb3c61fcd6a43472e965b89e677e7.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|WeatherServiceImpl.java-faf126080658c05d13e41b0e3675bb84.html|#|6|#|gaiaworks , gaia , sa|#||#|
+greeSniper|#|weather|#|WeatherService.java-b50997c9a8f7de3d0cb04353c7c86ead.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|CityClient.java-be1417d0a56423f1f57c5c9c6c6880ea.html|#|6|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|WeatherJob.java-6cb012cee07fba666ad5df19b5fad95d.html|#|10|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|Application.java-29b09dadc36e1d4093a16352201e5792.html|#|4|#|gaiaworks , gaia|#||#|
+greeSniper|#|weather|#|pom.xml-3162c49ebceae24c61e5fc158e281355.html|#|2|#|gaiaworks , gaia|#||#|

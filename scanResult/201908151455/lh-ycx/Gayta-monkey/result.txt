@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+lh-ycx|#|Gayta-monkey|#|WDJRanked.txt-68fdc3d09ffd7e7b12bfb562cbaebb8e.html|#|401|#|admin , root , password , administrator , sa , uname , gaiaworks , gaia|#||#|

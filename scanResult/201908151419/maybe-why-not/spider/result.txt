@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+maybe-why-not|#|spider|#|maybe-why-not-spider-blob-17185753c1f01dd8c9bc889dad455fb3f6d338b2-butian_company_url.txt.html|#|1|#||#|http://www.gaiaworks.cn|#|

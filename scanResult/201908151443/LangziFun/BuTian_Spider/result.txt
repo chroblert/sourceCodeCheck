@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+LangziFun|#|BuTian_Spider|#|blob-4e153e17233344cfc043623bca4b77b054448391-%E8%A1%A5%E5%A4%A9%E7%88%AC%E8%99%AB-%E8%B4%9F%E8%B4%A3%E6%95%B0%E6%8D%AE%E7%AD%9B%E9%80%89-%E4%B8%8D%E5%B8%A6http%E7%9A%84.txt.html|#|57|#|gaiaworks , admin , gaia , sa|#||#|

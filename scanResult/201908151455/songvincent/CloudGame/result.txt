@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+songvincent|#|CloudGame|#|SuZhou.json-05d4d4dd3ad20d0fbf32d3411d754bae.html|#|12|#|sa|#||#|

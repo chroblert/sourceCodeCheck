@@ -1,0 +1,4 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+LangziFun|#|BuTian_Spider|#|%E4%B8%8D%E5%B8%A6http%E7%9A%84.txt-af7a89f23be01e17a28c8a53b65e84a1.html|#|57|#|admin , gaiaworks , gaia , sa|#||#|
+LangziFun|#|BuTian_Spider|#|%E8%A1%A5%E5%A4%A9URL.txt-2b42781f0da4663e41347e505dfffb96.html|#|61|#|admin , gaiaworks , gaia , sa|#||#|
+LangziFun|#|BuTian_Spider|#|srcname%E6%8A%80%E5%B7%A7%E5%AF%BB%E6%89%BE.txt-2e9f710a5acbfa83f3bebfa007e68623.html|#|169|#|admin , gaiaworks , gaia , sa|#||#|

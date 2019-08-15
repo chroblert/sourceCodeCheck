@@ -1,0 +1,3 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+jibp|#|quartz|#|project.assets.json-4d97c09775be961be5eda8e360635628.html|#|30|#|gaiaworks , gaia , sa|#|https://nuget.gaiaworks.cn|#|
+jibp|#|quartz|#|RefreshInterval.json-2afcf4d9ebac6b6915bf32ea45029946.html|#|2|#|gaiaworks , gaia|#||#|

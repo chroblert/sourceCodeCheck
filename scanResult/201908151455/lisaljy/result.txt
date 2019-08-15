@@ -1,0 +1,2 @@
+userName|#|projectName|#|userProjectWeight
+lisaljy|#|UESTC-FinalProject|#|4

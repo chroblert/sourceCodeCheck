@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+Falonie|#|ScrapyCrawler|#|newseed_%E5%85%B6%E4%BB%96%E8%BD%AE_scrapy2.csv-0e117d9ffc135d4b9e3ae2173daca273.html|#|7|#|gaiaworks , gaia , sa|#||#|

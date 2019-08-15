@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+jibp|#|quartz|#|jibp-quartz-blob-e291da7e93966e8bb9b77f21c4f7f81ab4cbe720-QuartzNetUI-ConsoleApp1-obj-project.assets.json.html|#|1|#||#|https://nuget.gaiaworks.cn|#|

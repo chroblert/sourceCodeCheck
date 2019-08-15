@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+jhmuller|#|midaxo|#|companies-26-06-2018%20(7).csv-05f6d5d615e2f944266c24f26bd12ead.html|#|168|#|admin , root , administrator , sa , gaiaworks , gaia|#||#|

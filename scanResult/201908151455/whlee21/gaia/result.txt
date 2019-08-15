@@ -1,0 +1,3 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+whlee21|#|gaia|#|FieldMappingUtil.java-44e39161100b7a11099f5f57f34c337d.html|#|9|#|gaia , sa|#||#|
+whlee21|#|gaia|#|SimpleDefaultsYaml.java-05de6cc1259d22186b80f496eb72453d.html|#|9|#|admin , gaia|#||#|

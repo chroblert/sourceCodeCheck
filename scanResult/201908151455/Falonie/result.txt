@@ -1,0 +1,2 @@
+userName|#|projectName|#|userProjectWeight
+Falonie|#|ScrapyCrawler|#|7

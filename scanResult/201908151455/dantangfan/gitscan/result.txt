@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+dantangfan|#|gitscan|#|factories.txt-cc35593bb95e23278444b96690f4bdf3.html|#|47|#|admin , gaiaworks , gaia , sa|#||#|

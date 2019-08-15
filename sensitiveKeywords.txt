@@ -1,0 +1,11 @@
+username
+uname
+password
+passwd
+root
+admin
+gaiaworkforce
+gaiaworks
+gaia
+sa
+administrator

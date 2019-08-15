@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+maybe-why-not|#|spider|#|butian_company_url.txt-e1d203e6f92b7ec38f9a2a2481d0421c.html|#|64|#|admin , gaiaworks , gaia , sa|#|http://www.gaiaworks.cn|#|

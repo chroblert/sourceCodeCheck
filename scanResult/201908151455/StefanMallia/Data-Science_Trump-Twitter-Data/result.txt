@@ -1,0 +1,2 @@
+userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList
+StefanMallia|#|Data-Science_Trump-Twitter-Data|#|cursor_1587147825929927703.txt-5d6a52d0272e682cec8a4cd79efba506.html|#|61|#|admin , gaiaworkforce , sa , gaiaworks , gaia|#||#|
