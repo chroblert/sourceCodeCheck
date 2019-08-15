@@ -219,9 +219,6 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
     if html != "Fail":
         dom_tree = etree.HTML(html)
         # print(html)
-        # dom_tree_xpath_result_list = dom_tree.xpath('/html/body/div[4]/div/main/div[3]/div[1]/div[3]/div[2]/table')
-        # dom_tree_xpath_result_list = dom_tree.xpath('/html/body/div[4]/div/main//div[@itemprop="text"]/table')
-        # dom_tree_xpath_result_list = dom_tree.xpath('/html/body/div[4]/div/main//div[@itemprop="text"]')
         dom_tree_xpath_result_list = dom_tree.xpath('/html/body/div[4]/div/main//div[@itemprop="text" or@ id="readme"]')
         fileHtml = ''
         if len(dom_tree_xpath_result_list) != 0:
@@ -229,21 +226,6 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
         else:
             save_html_response_to_html_file(html,'ttttt.html')
             print("没有匹配到文本中的内容")
-
-        # fileHtml = (etree.tostring(dom_tree.xpath('/html/body/div[4]/div/main/div[3]/div[1]/div[3]/div[2]/table')[0])).decode('utf-8')
-        # fileHtml = ''.join(dom_tree.xpath('/html/body/div[4]/div/main/div[3]/div[1]/div[3]/div[2]/table'))
-        # test = dom_tree.xpath('/html/body/div[4]/div/main/div[3]/div[1]/div[3]/div[2]/table')
-        # print(test)
-        # print(len(test))
-        # testList = []
-        # for i in test:
-        #     print(etree.tostring(i).decode('utf-8'))
-        #     testList.append(etree.tostring(i).decode('utf-8'))
-        # fileHtml = ''.join(testList)
-        # print(type(test))
-        # input("暂停")
-        # save_html_response_to_html_file(responseData = fileHtml,htmlFileName= htmlFileName)
-        # print("html response保存到%s文件"%htmlFileName)
         # 2. 提取出响应内容中的所有IP
         allIPList = list(set(re.findall(r'\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b',fileHtml)))
         # print("该文件内包含的IP如下：")
