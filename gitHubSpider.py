@@ -401,7 +401,8 @@ def get_all_user_project_with_all_keyword(uri = 'gaiaKeywords.txt',cookie = {}):
     allUserProjectList = []
     gaiaKeywordList = read_txt_file_to_list(uri = uri)
     for gaiaKeyword in gaiaKeywordList:
-        allUserProjectList.extend(get_all_user_project_with_keyword(keyword = gaiaKeyword,cookie = cookie))
+        # 将list转为set再转为list是为了去掉初始list中的重复数据
+        allUserProjectList.extend(list(set(get_all_user_project_with_keyword(keyword = gaiaKeyword,cookie = cookie))))
     return deepcopy(allUserProjectList)
 
 if __name__ == '__main__':
