@@ -13,6 +13,7 @@ import re
 import os
 import time
 import hashlib
+import shutil
 
 def get_html_with_keyword(keyword,cookie,pageNum = 1):
     '''
@@ -377,7 +378,14 @@ def get_sensitive_info_for_github(scanResultDir,userItemList,cookie = {}):
                 f.write(toStoreUserInfo)
                 f.write('\n')
         else:
-            pass
+            # 删除为该用户创建的目录
+            pathToBeDelete = scanResultDir + '/' + userName
+            try:
+                shutil.rmtree(pathToBeDelete)
+            except OSError as e:
+                print(e)
+            else:
+                print("The directory is deleted successfully")
     print('在Github上的源码扫描结束')
             
 def get_all_user_project_with_all_keyword(uri = 'gaiaKeywords.txt',cookie = {}):
@@ -407,15 +415,15 @@ if __name__ == '__main__':
     # save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
     #print(allUserProjectList)
     # 3. 将格式为用户名/项目名的字符串进行处理，存储为字典格式,并保存到json文件中
-    allUserProjectListUri = "allUserProjectList.txt"
-    userProjectDict = file_data_process(allUserProjectListUri)
-    save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
+    # allUserProjectListUri = "allUserProjectList.txt"
+    # userProjectDict = file_data_process(allUserProjectListUri)
+    # save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
     # 4. 在某用户的某个仓库中搜索关键词，得到仓库中所有包含该关键词的文件链接，并将结果保存到json文件中
-    allUserProjectDictUri = 'allUserProjectDict.json'
-    allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
-    allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
-    print("保存成文件")
-    save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
+    # allUserProjectDictUri = 'allUserProjectDict.json'
+    # allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
+    # allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
+    # print("保存成文件")
+    # save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
     allUserItemListUri = 'allUserItemList.json'
     # 5. 读取文件中的数据
     allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
