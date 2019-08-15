@@ -206,9 +206,9 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
     return:
     
     '''
-    gaiaIPListUri = 'gaiaIP.txt'
-    gaiaDomainListUri = 'gaiaDomain.txt'
-    sensitiveKeywordListUri = 'sensitiveKeywords.txt'
+    # gaiaIPListUri = 'gaiaIP.txt'
+    # gaiaDomainListUri = 'gaiaDomain.txt'
+    # sensitiveKeywordListUri = 'sensitiveKeywords.txt'
     gaiaIPList = read_txt_file_to_list(uri = gaiaIPListUri)
     gaiaDomainList = read_txt_file_to_list(gaiaDomainListUri)
     sensitiveKeywordList = read_txt_file_to_list(sensitiveKeywordListUri)
@@ -397,6 +397,12 @@ def get_sensitive_info_for_github(scanResultDir,userItemList,cookie = {}):
             pass
     print('在Github上的源码扫描结束')
             
+def get_all_user_project_with_all_keyword(uri = 'gaiaKeywords.txt',cookie = {}):
+    allUserProjectList = []
+    gaiaKeywordList = read_txt_file_to_list(uri = uri)
+    for gaiaKeyword in gaiaKeywordList:
+        allUserProjectList.extend(get_all_user_project_with_keyword(keyword = gaiaKeyword,cookie = cookie))
+    return deepcopy(allUserProjectList)
 
 if __name__ == '__main__':
     scanTimeAsDir = time.strftime('%Y%m%d%H%M',time.localtime(time.time()))
@@ -404,14 +410,16 @@ if __name__ == '__main__':
     if not os.path.exists(scanResultDir):
         os.makedirs(scanResultDir)
     overallScanResultUri = scanResultDir + '/' + 'scanResult.txt'
+    # 一些重要文件
+    gaiaKeywordListUri = 'gaiaKeywords.txt'
+    gaiaIPListUri = 'gaiaIP.txt'
+    gaiaDomainListUri = 'gaiaDomain.txt'
+    sensitiveKeywordListUri = 'sensitiveKeywords.txt'
     # 1. 拿到用于保持登录状态的cookie
     cookie = get_cookie_from_github(refreshCookie=False)
     # print(cookie)
-    # 2. 拿到所有包含关键词的用户名/项目名
-    allUserProjectList = []
-    gaiaKeywordList = read_txt_file_to_list(uri = 'gaiaKeyworks.txt')
-    for gaiaKeyword in gaiaKeywordList:
-        allUserProjectList.extend(get_all_user_project_with_keyword(keyword = gaiaKeyword,cookie = cookie))
+    # 2. 拿到包含所有关键词的所有用户名/项目名
+    allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
     # save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
     #print(allUserProjectList)
     # 3. 将格式为用户名/项目名的字符串进行处理，存储为字典格式,并保存到json文件中
