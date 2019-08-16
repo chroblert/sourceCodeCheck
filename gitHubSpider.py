@@ -118,7 +118,7 @@ def get_fileLink_use_recursive(url,cookie = {}):
                 fileLinkCount = fileLinkCount + 1
                 fileLinkList.append(fileOrDirLink)
             else:
-                searchResult = test(fileOrDirLink)
+                searchResult = get_fileLink_use_recursive(fileOrDirLink)
                 # print("查找结束，返回查找到的fileLinkList")
                 # print(searchResult)
                 fileLinkList.extend(searchResult)
@@ -137,7 +137,7 @@ class userItem:
         self.projectList = [] # 包含关键词的项目的list
         self.fileLinkDict = {} # 包含关键词的文件链接的dict 格式为 {"project1":["fileLink1","fileLink2","fileLink3"],"project2":["fileLink1","fileLink2","fileLink3"]}
 
-def get_all_fileLink(dataDict,keyword = 'gaiaworks',cookie = {}):
+def get_all_fileLink(dataDict,cookie = {}):
     userItemList = []
     for user in dataDict.keys():
         print("user:" + user)
@@ -147,7 +147,7 @@ def get_all_fileLink(dataDict,keyword = 'gaiaworks',cookie = {}):
         fileLinkDict = {}
         for project in dataDict[user]:
             #print(project)
-            allFileLinkList = get_all_fileLink_one_user_one_project(user = user,project = project,keyword = keyword,cookie = cookie)
+            allFileLinkList = get_all_fileLink_one_user_one_project(userName = user,projectName = project,cookie = cookie)
             fileLinkDict[project] = []
             fileLinkDict[project].extend(allFileLinkList)
             print("zong=======================")
@@ -406,14 +406,14 @@ if __name__ == '__main__':
     # userProjectDict = file_data_process(allUserProjectListUri)
     # save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
     # 4. 在某用户的某个仓库中搜索关键词，得到仓库中所有包含该关键词的文件链接，并将结果保存到json文件中
-    # allUserProjectDictUri = 'allUserProjectDict.json'
-    # allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
-    # allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
+    allUserProjectDictUri = 'allUserProjectDict.json'
+    allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
+    allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
     # print("保存成文件")
-    # save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
-    allUserItemListUri = 'allUserItemList.json'
+    save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
+    # allUserItemListUri = 'allUserItemList.json'
     # 5. 读取文件中的数据
-    allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
-    print(allUserItemList)
-    get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
+    # allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
+    # print(allUserItemList)
+    # get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
     
