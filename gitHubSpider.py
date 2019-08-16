@@ -406,14 +406,14 @@ if __name__ == '__main__':
     # userProjectDict = file_data_process(allUserProjectListUri)
     # save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
     # 4. 在某用户的某个仓库中搜索关键词，得到仓库中所有包含该关键词的文件链接，并将结果保存到json文件中
-    allUserProjectDictUri = 'allUserProjectDict.json'
-    allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
-    allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
+    # allUserProjectDictUri = 'allUserProjectDict.json'
+    # allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
+    # allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
     # print("保存成文件")
-    save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
-    # allUserItemListUri = 'allUserItemList.json'
+    # save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
+    allUserItemListUri = 'allUserItemList.json'
     # 5. 读取文件中的数据
-    # allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
+    allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
     # print(allUserItemList)
-    # get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
+    get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
     
