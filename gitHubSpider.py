@@ -89,59 +89,46 @@ def file_data_process(uri):
             userProjectDict[user].append(project)
     #print(userProjectDict)
     return userProjectDict
-    
 
-
-def get_fileLink_one_page(user,project,keyword = 'gaiaworks',cookie = {} ,pageNum = 1):
+def  get_all_fileLink_one_user_one_project(userName,projectName,cookie = {}):
+    url = 'https://github.com/' + userName + '/' + projectName
+    return deepcopy(get_fileLink_use_recursive(url = url,cookie = cookie)) 
+def get_fileLink_use_recursive(url,cookie = {}):
     '''
-    根据user和project，搜索在项目中包含关键词的具体文件链接
+    递归实现
     '''
-    url = 'https://github.com/' + user + '/' + project + '/search?o=desc&p=' + str(pageNum) + '&q=%22' + keyword + '%22&s=indexed'
-    html = get_html(url,cookie = cookie)
-    if html != 'Fail':
-        dom_tree = etree.HTML(html)
-        # xpath匹配
-        fileLinks = dom_tree.xpath('//*[@id="code_search_results"]/div/div/div[1]/div/a/@href')
-        bottomTab = dom_tree.xpath('//*[@id="code_search_results"]/div[2]/div/a/text()')
-        isEnd = True
-        for tab in bottomTab:
-            #print(tab)
-            if tab == "Next":
-                isEnd = False
-        if not isEnd:
-            print("第%d页结束，继续下一页"%pageNum)
-        else:
-            print("整体结束")
-    else:
-        isEnd = False
-        fileLinks = []
+    # 1. 结束条件：当访问目录url获得的内容里只有文件名，没有目录名(理想情况)；特殊情况（无法访问目标url），同样结束
+    html = get_html(url = url ,cookie = cookie)
     fileLinkList = []
-    if len(fileLinks) != 0:
-        for fileLink in fileLinks:
-            fileLinkList.append('https://github.com' + str(fileLink))
-    return isEnd,fileLinkList
-    #with open('result.html','w',encoding='utf-8') as f:
-    #    f.write(html)
-
-def get_all_fileLink_one_user_one_project(user,project,keyword = 'gaiaworks',cookie = {}):
-    '''
-    抓取包含关键词的所有页的fileLink
-    '''
-    print("抓取%s用户的%s仓库中所有包含%s关键词的fileLink"%(user,project,keyword))
-    pageNum = 0
-    #isEnd,allUserProjectList = get_html_with_keyword(keyword = keyword,cookie = cookie,pageNum = pageNum)
-    isEnd = False
-    allFileLinkList = []
-    while(not isEnd):
-        pageNum = pageNum + 1
-        isEnd,fileLinkList = get_fileLink_one_page(user = user,project = project,keyword = keyword,cookie = cookie,pageNum = pageNum)
-        if len(fileLinkList) == 0:
-            #pageNum = pageNum -1
-            print('没有获取到%d页的内容，继续抓取第%d页'%(pageNum-1,pageNum))
-        else:
-            allFileLinkList.extend(fileLinkList)
-            # print(fileLinkList)
-    return allFileLinkList
+    # 第一个递归结束条件
+    print("递归查找%s目录下的文件"%url)
+    if html == 'Fail' :
+        # print('html = Fail,结束递归: ' + url)
+        return []
+    else:
+        dom_tree = etree.HTML(html)
+        fileAndDirLinkList = dom_tree.xpath('//tr[@class="js-navigation-item" or @class="js-navigation-item navigation-focus"]//td[@class="content"]//a/@href')
+        fileLinkCount = 0
+        for fileOrDirLink in fileAndDirLinkList:
+            # 为链接前加上https://github.com
+            fileOrDirLink = 'https://github.com' + fileOrDirLink
+            # if fileOrDirLink.split('/')[3] == 'blob':
+            if fileOrDirLink.split('/')[5] == 'blob':
+                # fileLink的个数。
+                fileLinkCount = fileLinkCount + 1
+                fileLinkList.append(fileOrDirLink)
+            else:
+                searchResult = test(fileOrDirLink)
+                # print("查找结束，返回查找到的fileLinkList")
+                # print(searchResult)
+                fileLinkList.extend(searchResult)
+        # 第二个递归结束条件:若fileLink的个数为fileOrDirLink列表中元素的个数，则结束递归
+        if fileLinkCount == len(fileAndDirLinkList):
+            # print('该目录下全部为文件链接，结束递归：' + url)
+            # 返回查找得到的fileLinkList
+            return fileLinkList
+        # 递归返回结果
+        return fileLinkList
 
 class userItem:
     def __init__(self):
