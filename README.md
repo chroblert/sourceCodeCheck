@@ -10,11 +10,14 @@
 
 - `pip install -r requirements.txt`
 - 按照**文件说明**填写一些内容
+  - ![1565946057050](README.assets/1565946057050.png)
 - 填写自己github上的用户名和密码
+  - ![1565945971994](README.assets/1565945971994.png)
   - 注：在新机器上第一次登录时需要有验证码
   - 因而第一次需要先实际在浏览器中登录，并填写验证码
   - 之后，方可继续正常执行
 - 如果需要更新存储的Cookie值，则需要在gitHubSpider.py文件中的`get_cookie_from_github(refreshCookie=False)`False改为True
+  - ![1565946025768](README.assets/1565946025768.png)
 - 之后运行即可
 
 # 版本说明
@@ -40,7 +43,9 @@
 - v 1.2.0 【待做】
   - 增加随机代理IP支持
 - v 1.3.0 【待做】
-  - 增加数据库缓存支持
+  - 增加redis|mongodb数据库缓存支持
+- v 1.4.0 【待做】
+  - 增加图形界面操作展示
 - v 2.0.0 【待做】
   - 增加CSDN代码扫描
 - v 3.0.0 【待做】
