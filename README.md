@@ -1,7 +1,7 @@
 # 文件说明
 
 > - config 目录下是一些必填的配置性文件
-> - gaiaIP.txt` : 公司服务器的IP。每行一个IP地址
+> - `gaiaIP.txt` : 公司服务器的IP。每行一个IP地址
 > - `gaiaDomain.txt`: 公司一些服务的域名。每行一个域名。本版程序暂时未用到
 > - `gaiaKeywords.txt`:能够识别为本公司的一些标志性关键字
 > - `sensitiveKeywords.txt`:一些比较敏感的关键词，如用户名、密码之类的
