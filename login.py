@@ -45,8 +45,8 @@ def gihub_login(url,token,cookie):
         "commit": "Sign in",
         "utf8":"✓",
         "authenticity_token":token,
-        "login":"你的用户名",
-        "password":"你的密码"
+        "login":"jeffrey-li-gaia",
+        "password":"GaIa@1234p;/P:?"
     }
     header = {'User-Agent': 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'}
     response = requests.post(url,data=data,cookies=cookie,headers = header)
