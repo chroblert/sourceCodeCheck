@@ -7,10 +7,12 @@ from tool import get_html
 from tool import save_object_to_json_file
 from tool import save_html_response_to_html_file
 from tool import read_txt_file_to_list
+from tool import Logger
 from login import get_cookie_from_github
 from copy import deepcopy
 import re
 import os
+import sys
 import time
 import hashlib
 import shutil
@@ -389,6 +391,12 @@ if __name__ == '__main__':
     if not os.path.exists(scanResultDir):
         os.makedirs(scanResultDir)
     overallScanResultUri = scanResultDir + '/' + 'scanResult.txt'
+    logPath = scanResultDir + '/Logs'
+    if not os.path.exists(logPath):
+        os.makedirs(logPath)
+    sys.stdout = Logger(logPath + '/info.log',sys.stdout)
+    sys.stderr = Logger(logPath + '/error.log',sys.stderr)
+    sys.stderr = Logger(logPath + '/error.log',sys.stderr)
     # 一些重要文件
     gaiaKeywordListUri = './config/gaiaKeywords.txt'
     gaiaIPListUri = './config/gaiaIP.txt'
@@ -396,7 +404,7 @@ if __name__ == '__main__':
     sensitiveKeywordListUri = './config/sensitiveKeywords.txt'
     # 1. 拿到用于保持登录状态的cookie
     cookie = get_cookie_from_github(refreshCookie=False)
-    # print(cookie)
+    print(cookie)
     # 2. 拿到包含所有关键词的所有用户名/项目名
     # allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
     # save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
@@ -411,9 +419,9 @@ if __name__ == '__main__':
     # allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
     # print("保存成文件")
     # save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
-    allUserItemListUri = 'allUserItemList.json'
+    # allUserItemListUri = 'allUserItemList.json'
     # 5. 读取文件中的数据
-    allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
+    # allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
     # print(allUserItemList)
-    get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
+    # get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
     

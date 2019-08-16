@@ -1,4 +1,6 @@
 import json
+import sys
+import os
 import requests
 from tenacity import retry, stop_after_attempt, wait_random
 from copy import deepcopy
@@ -64,3 +66,16 @@ def read_txt_file_to_list(uri):
         for line in tempLineList:
             lineList.append(line.strip('\n'))
     return deepcopy(lineList)
+
+# 输出到控制台的消息同时输出到文件中
+class Logger(object):
+    def __init__(self, filename='info.log', stream=sys.stdout):
+	    self.terminal = stream
+	    self.log = open(filename, 'a',encoding = 'utf-8')
+
+    def write(self, message):
+	    self.terminal.write(message)
+	    self.log.write(message)
+
+    def flush(self):
+	    pass
