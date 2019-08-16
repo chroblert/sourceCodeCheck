@@ -78,4 +78,4 @@ def get_cookie_from_github(refreshCookie = False):
             cookie = temp[0]["cookie"]
             token = temp[1]["token"]
         print("读取cookie完毕")
-    return cookie 
+    return cookie
