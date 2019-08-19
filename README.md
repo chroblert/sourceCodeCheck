@@ -5,6 +5,7 @@
 > - `gaiaDomain.txt`: 公司一些服务的域名。每行一个域名。本版程序暂时未用到
 > - `gaiaKeywords.txt`:能够识别为本公司的一些标志性关键字
 > - `sensitiveKeywords.txt`:一些比较敏感的关键词，如用户名、密码之类的
+> - scanResult目录下保存的是扫描结果
 
 # 使用说明
 
