@@ -410,7 +410,7 @@ def show_search_result(scanResultDirUri):
             userProjectFileResultTxtUri = scanResultDirUri + '/' + user.split('|#|')[0] + '/' + userProject.split('|#|')[1] + '/result.txt'
             userProjectFileList = read_txt_file_to_list(userProjectFileResultTxtUri)
             allUserProjectFileList.extend(deepcopy(userProjectFileList[1:]))
-    save_List_to_file(allUserProjectFileList,'show-result.txt')
+    save_List_to_file(allUserProjectFileList,scanResultDirUri + '/show-result.txt')
 
 
 
