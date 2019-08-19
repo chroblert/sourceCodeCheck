@@ -1,3 +1,4 @@
+# @Author: JC
 import requests
 import json
 from lxml import etree
@@ -16,6 +17,7 @@ import sys
 import time
 import hashlib
 import shutil
+
 
 def get_html_with_keyword(keyword,cookie,pageNum = 1):
     '''
@@ -157,7 +159,7 @@ def get_all_fileLink(dataDict,cookie = {}):
             allFileLinkList = get_all_fileLink_one_user_one_project(userName = user,projectName = project,cookie = cookie)
             fileLinkDict[project] = []
             fileLinkDict[project].extend(allFileLinkList)
-            print("zong=======================")
+            print("%s 用户 %s 项目内包含敏感信息的文件链接：=======================")
             print(allFileLinkList)
         uItem.fileLinkDict.update(fileLinkDict)
         userItemList.append(uItem)
@@ -165,6 +167,11 @@ def get_all_fileLink(dataDict,cookie = {}):
     return userItemList
 
 def read_json_file_to_userItemList(fileName):
+    '''
+    从json格式的文件中读取数据并返回一饿userItemList
+
+    :fileName 存储json数据的文件名
+    '''
     allUserItemList = read_json_file_to_object(fileName)
     # print(allUserItemList)
     allUItemList = []
@@ -194,12 +201,11 @@ def save_userItemList_to_json_file(userItemList,fileName = 'userItemList.json'):
 
 def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
     '''
-    一个IP list
-    一个域名 list
-    普通的敏感字符串 list
-
-    return:
+    从给定的fileLink中去查找一些关键信息，并进行匹配返回
     
+    :fileLink 文件链接
+    :cookie 维持登录状态的cookie值
+    :return fileWeight,fileHtml,list(set(retIPList)),list(set(retDomainList)),list(set(havedSensitiveKeywordList))
     '''
     # gaiaIPListUri = 'gaiaIP.txt'
     # gaiaDomainListUri = 'gaiaDomain.txt'
@@ -242,7 +248,7 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
         # 3. 提取出响应内容的所有域名url
         # allDomainUrlList = list(set(re.findall(r'\b(https?:\/\/.*\.?com|cn|org|edu)\b',fileHtml)))
         # allDomainUrlList = list(set(re.findall(r'(http|https)://(\w+\.){1,3}\w+',fileHtml)))
-        allDomainUrlList = re.findall(r'\b((?:http|https)://(?:\w+\.){1,}\w+)\b',fileHtml)
+        allDomainUrlList = re.findall(r'\b((?:http|https)://(?:[\w|-]+\.){1,}\w+)\b',fileHtml)
         # print("该文件内包含的域名如下：")
         # print(allDomainUrlList)
         save_List_to_file(list(set(allDomainUrlList)),'allDomainUrlList.txt')
@@ -285,8 +291,9 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
 def get_sensitive_info_for_one_file(fullDir,fileLink,cookie = {}):
     '''
     对于给定的文件链接，调用search_all_sensitive_data_in_one_file()函数，去得到一些关键信息。
+
     若文件内包含敏感信息，则fileWeight为相应的权重，returnInfo包含文件存储名，文件权重，文件敏感词list，domainlist，IPList
-    :fullDir是为某用户某项目创建的目录
+    :fullDir是为某用户某项目创建的目录 
     :fileLink是某用户某项目内的一个文件的链接
     :cookie是去访问链接时需要用到的cookie
     :return fileWeight,returnInfo
@@ -394,7 +401,7 @@ def show_search_result(scanResultDirUri):
     userResultTxtUri = scanResultDirUri + '/result.txt'
     userList = read_txt_file_to_list(userResultTxtUri)
     userList = deepcopy(userList[1:])
-    userProjectFileList = []
+    allUserProjectFileList = []
     for user in userList:
         userProjectResultTxtUri = scanResultDirUri + '/' + user.split('|#|')[0] + '/result.txt'
         userProjectList = read_txt_file_to_list(userProjectResultTxtUri)
@@ -402,8 +409,8 @@ def show_search_result(scanResultDirUri):
         for userProject in userProjectList:
             userProjectFileResultTxtUri = scanResultDirUri + '/' + user.split('|#|')[0] + '/' + userProject.split('|#|')[1] + '/result.txt'
             userProjectFileList = read_txt_file_to_list(userProjectFileResultTxtUri)
-            userProjectFileList.extend(deepcopy(userProjectFileList[1:]))
-    save_List_to_file(userProjectFileList,'show-result.txt')
+            allUserProjectFileList.extend(deepcopy(userProjectFileList[1:]))
+    save_List_to_file(allUserProjectFileList,'show-result.txt')
 
 
 
@@ -445,6 +452,7 @@ if __name__ == '__main__':
     # 5. 读取文件中的数据
     allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
     # print(allUserItemList)
-    get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
-    show_search_result(scanResultDir)
+    # get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
+    # show_search_result(scanResultDir)
+    show_search_result('scanResult/201908191053')
     
