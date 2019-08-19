@@ -115,11 +115,16 @@ def get_fileLink_use_recursive(url,cookie = {}):
             # 为链接前加上https://github.com
             fileOrDirLink = 'https://github.com' + fileOrDirLink
             # if fileOrDirLink.split('/')[3] == 'blob':
-            if fileOrDirLink.split('/')[5] == 'blob':
+            if fileOrDirLink.split('/')[5] == 'blob': # 代表是文件
                 # fileLink的个数。
                 fileLinkCount = fileLinkCount + 1
-                fileLinkList.append(fileOrDirLink)
-            else:
+                # add：只有在文件后缀格式不为可读文件的情况下，才添加进fileLinkList中
+                if fileOrDirLink.split('.')[len(fileOrDirLink.split('.')) - 1] in ['jpg','png','zip','rar','exe','bin','mp3','mp4','class','pdf']:
+                    print('不记录不可读文件链接')
+                    pass
+                else:
+                    fileLinkList.append(fileOrDirLink)
+            else: # 说明是目录
                 searchResult = get_fileLink_use_recursive(fileOrDirLink)
                 # print("查找结束，返回查找到的fileLinkList")
                 # print(searchResult)
@@ -406,20 +411,20 @@ if __name__ == '__main__':
     cookie = get_cookie_from_github(refreshCookie=False)
     print(cookie)
     # 2. 拿到包含所有关键词的所有用户名/项目名
-    # allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
-    # save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
-    #print(allUserProjectList)
+    allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
+    save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
+    print(allUserProjectList)
     # 3. 将格式为用户名/项目名的字符串进行处理，存储为字典格式,并保存到json文件中
-    # allUserProjectListUri = "allUserProjectList.txt"
-    # userProjectDict = file_data_process(allUserProjectListUri)
-    # save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
+    allUserProjectListUri = "allUserProjectList.txt"
+    userProjectDict = file_data_process(allUserProjectListUri)
+    save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
     # 4. 在某用户的某个仓库中搜索关键词，得到仓库中所有包含该关键词的文件链接，并将结果保存到json文件中
-    # allUserProjectDictUri = 'allUserProjectDict.json'
-    # allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
-    # allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
-    # print("保存成文件")
-    # save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
-    # allUserItemListUri = 'allUserItemList.json'
+    allUserProjectDictUri = 'allUserProjectDict.json'
+    allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
+    allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
+    print("保存成文件")
+    save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
+    allUserItemListUri = 'allUserItemList.json'
     # 5. 读取文件中的数据
     # allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
     # print(allUserItemList)
