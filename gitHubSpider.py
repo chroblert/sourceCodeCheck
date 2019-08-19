@@ -92,7 +92,7 @@ def file_data_process(uri):
     #print(userProjectDict)
     return userProjectDict
 
-def  get_all_fileLink_one_user_one_project(userName,projectName,cookie = {}):
+def get_all_fileLink_one_user_one_project(userName,projectName,cookie = {}):
     url = 'https://github.com/' + userName + '/' + projectName
     return deepcopy(get_fileLink_use_recursive(url = url,cookie = cookie)) 
 def get_fileLink_use_recursive(url,cookie = {}):
@@ -103,7 +103,7 @@ def get_fileLink_use_recursive(url,cookie = {}):
     html = get_html(url = url ,cookie = cookie)
     fileLinkList = []
     # 第一个递归结束条件
-    print("递归查找%s目录下的文件"%url)
+    print("递归查找 %s 目录下的文件"%url)
     if html == 'Fail' :
         # print('html = Fail,结束递归: ' + url)
         return []
@@ -119,7 +119,7 @@ def get_fileLink_use_recursive(url,cookie = {}):
                 # fileLink的个数。
                 fileLinkCount = fileLinkCount + 1
                 # add：只有在文件后缀格式不为可读文件的情况下，才添加进fileLinkList中
-                if fileOrDirLink.split('.')[len(fileOrDirLink.split('.')) - 1] in ['jpg','png','zip','rar','exe','bin','mp3','mp4','class','pdf']:
+                if fileOrDirLink.split('.')[len(fileOrDirLink.split('.')) - 1] in ['jpg','png','gif','ico','svg','zip','rar','exe','bin','jar','mp3','mp4','class','pdf']:
                     print('不记录不可读文件链接')
                     pass
                 else:
@@ -273,7 +273,7 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
             print(list(set(havedSensitiveKeywordList)))
         
     else:
-        print("在GitHub上读取%s文件失败"%fileLink)
+        print("在GitHub上读取 %s 文件失败"%fileLink)
         fileWeight = 0
         fileHtml = ''
         retIPList = []
@@ -316,7 +316,7 @@ def get_sensitive_info_for_one_userProject(scanResultDir,userName,projectName,us
         os.makedirs(fullUserProjectDir)
     userProjectWeight = 0
     with open(fullUserProjectDir + '/result.txt','w',encoding = 'utf-8') as f:
-        f.write('userName|#|projectName|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList')
+        f.write('userName|#|projectName|#|fileLinkUrl|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList')
         f.write('\n')
     # fileLinkUrlList = ['https://github.com/qiumingzhao/LearnJava/blob/01253ebc4d3fef53ee4ceb9e94796333f2010f22/asset/src/main/java/com/benlai/asset/task/Clock.java']
     # print(type(userItemDict.fileLinkDict))
@@ -327,7 +327,7 @@ def get_sensitive_info_for_one_userProject(scanResultDir,userName,projectName,us
         print("|||||======%s--->%s--->%s ======|||||"%(userName,projectName,fileLinkUrl))
         fileWeight,fileInfo = get_sensitive_info_for_one_file(fullDir = fullUserProjectDir,fileLink = fileLinkUrl,cookie = cookie)
         if fileWeight != 0:
-            toStoreFileInfoWithUserProjectName = userName + '|#|' + projectName + '|#|' +fileInfo
+            toStoreFileInfoWithUserProjectName = userName + '|#|' + projectName + '|#|' + fileLinkUrl + '|#|' + fileInfo
             with open( fullUserProjectDir + '/result.txt','a',encoding = 'utf-8') as f:
                 f.write(toStoreFileInfoWithUserProjectName)
                 f.write('\n')
@@ -390,6 +390,23 @@ def get_all_user_project_with_all_keyword(uri = 'gaiaKeywords.txt',cookie = {}):
         allUserProjectList.extend(list(set(get_all_user_project_with_keyword(keyword = gaiaKeyword,cookie = cookie))))
     return deepcopy(list(set(allUserProjectList)))
 
+def show_search_result(scanResultDirUri):
+    userResultTxtUri = scanResultDirUri + '/result.txt'
+    userList = read_txt_file_to_list(userResultTxtUri)
+    userList = deepcopy(userList[1:])
+    userProjectFileList = []
+    for user in userList:
+        userProjectResultTxtUri = scanResultDirUri + '/' + user.split('|#|')[0] + '/result.txt'
+        userProjectList = read_txt_file_to_list(userProjectResultTxtUri)
+        userProjectList = deepcopy(userProjectList[1:])
+        for userProject in userProjectList:
+            userProjectFileResultTxtUri = scanResultDirUri + '/' + user.split('|#|')[0] + '/' + userProject.split('|#|')[1] + '/result.txt'
+            userProjectFileList = read_txt_file_to_list(userProjectFileResultTxtUri)
+            userProjectFileList.extend(deepcopy(userProjectFileList[1:]))
+    save_List_to_file(userProjectFileList,'show-result.txt')
+
+
+
 if __name__ == '__main__':
     scanTimeAsDir = time.strftime('%Y%m%d%H%M',time.localtime(time.time()))
     scanResultDir = 'scanResult/' + scanTimeAsDir
@@ -411,22 +428,23 @@ if __name__ == '__main__':
     cookie = get_cookie_from_github(refreshCookie=False)
     print(cookie)
     # 2. 拿到包含所有关键词的所有用户名/项目名
-    allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
-    save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
-    print(allUserProjectList)
+    # allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
+    # save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
+    # print(allUserProjectList)
     # 3. 将格式为用户名/项目名的字符串进行处理，存储为字典格式,并保存到json文件中
-    allUserProjectListUri = "allUserProjectList.txt"
-    userProjectDict = file_data_process(allUserProjectListUri)
-    save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
-    # 4. 在某用户的某个仓库中搜索关键词，得到仓库中所有包含该关键词的文件链接，并将结果保存到json文件中
-    allUserProjectDictUri = 'allUserProjectDict.json'
-    allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
-    allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
-    print("保存成文件")
-    save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
+    # allUserProjectListUri = "allUserProjectList.txt"
+    # userProjectDict = file_data_process(allUserProjectListUri)
+    # save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
+    # # 4. 在某用户的某个仓库中搜索关键词，得到仓库中所有包含该关键词的文件链接，并将结果保存到json文件中
+    # allUserProjectDictUri = 'allUserProjectDict.json'
+    # allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
+    # allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
+    # print("保存成文件")
+    # save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
     allUserItemListUri = 'allUserItemList.json'
     # 5. 读取文件中的数据
-    # allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
+    allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
     # print(allUserItemList)
-    # get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
+    get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
+    show_search_result(scanResultDir)
     
