@@ -2,7 +2,6 @@
 import requests
 import json
 from lxml import etree
-# from lxml import html as lxmlhtml
 from tool import read_json_file_to_object
 from tool import get_html
 from tool import save_object_to_json_file
@@ -207,9 +206,7 @@ def search_all_sensitive_data_in_one_file(fileLink,cookie = {}):
     :cookie 维持登录状态的cookie值
     :return fileWeight,fileHtml,list(set(retIPList)),list(set(retDomainList)),list(set(havedSensitiveKeywordList))
     '''
-    # gaiaIPListUri = 'gaiaIP.txt'
-    # gaiaDomainListUri = 'gaiaDomain.txt'
-    # sensitiveKeywordListUri = 'sensitiveKeywords.txt'
+
     gaiaIPList = read_txt_file_to_list(uri = gaiaIPListUri)
     gaiaDomainList = read_txt_file_to_list(gaiaDomainListUri)
     sensitiveKeywordList = read_txt_file_to_list(sensitiveKeywordListUri)
@@ -325,10 +322,7 @@ def get_sensitive_info_for_one_userProject(scanResultDir,userName,projectName,us
     with open(fullUserProjectDir + '/result.txt','w',encoding = 'utf-8') as f:
         f.write('userName|#|projectName|#|fileLinkUrl|#|toStoreFileName|#|fileWeight|#|havedSensitiveKeywordList|#|retDomainList|#|retIPList')
         f.write('\n')
-    # fileLinkUrlList = ['https://github.com/qiumingzhao/LearnJava/blob/01253ebc4d3fef53ee4ceb9e94796333f2010f22/asset/src/main/java/com/benlai/asset/task/Clock.java']
-    # print(type(userItemDict.fileLinkDict))
-    # print(userItemDict.projectList)
-    # print(userItemDict.fileLinkDict.keys())
+
     fileLinkUrlList = userItemDict.fileLinkDict[projectName]
     for fileLinkUrl in fileLinkUrlList:
         print("|||||======%s--->%s--->%s ======|||||"%(userName,projectName,fileLinkUrl))
@@ -435,24 +429,24 @@ if __name__ == '__main__':
     cookie = get_cookie_from_github(refreshCookie=False)
     print(cookie)
     # 2. 拿到包含所有关键词的所有用户名/项目名
-    # allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
-    # save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
+    allUserProjectList = get_all_user_project_with_all_keyword(uri = gaiaKeywordListUri,cookie = cookie)
+    save_List_to_file(allUserProjectList,fileName = 'allUserProjectList.txt')
     # print(allUserProjectList)
     # 3. 将格式为用户名/项目名的字符串进行处理，存储为字典格式,并保存到json文件中
-    # allUserProjectListUri = "allUserProjectList.txt"
-    # userProjectDict = file_data_process(allUserProjectListUri)
-    # save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
+    allUserProjectListUri = "allUserProjectList.txt"
+    userProjectDict = file_data_process(allUserProjectListUri)
+    save_object_to_json_file(userProjectDict,'allUserProjectDict.json')
     # # 4. 在某用户的某个仓库中搜索关键词，得到仓库中所有包含该关键词的文件链接，并将结果保存到json文件中
-    # allUserProjectDictUri = 'allUserProjectDict.json'
-    # allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
-    # allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
+    allUserProjectDictUri = 'allUserProjectDict.json'
+    allUserProjectDict = read_json_file_to_object(allUserProjectDictUri)
+    allUserItemList = get_all_fileLink(allUserProjectDict,cookie = cookie)
     # print("保存成文件")
-    # save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
+    save_userItemList_to_json_file(allUserItemList,fileName = 'allUserItemList.json')
     allUserItemListUri = 'allUserItemList.json'
     # 5. 读取文件中的数据
     allUserItemList = read_json_file_to_userItemList(allUserItemListUri)
     # print(allUserItemList)
-    # get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
-    # show_search_result(scanResultDir)
-    show_search_result('scanResult/201908191053')
+    get_sensitive_info_for_github(scanResultDir = scanResultDir,userItemList = allUserItemList,cookie=cookie)
+    # 6. 搜集所有的数据并存放进一个文件中
+    show_search_result(scanResultDir)
     
