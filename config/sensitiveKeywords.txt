@@ -1,11 +1,7 @@
-盖雅
 username
 uname
 password
 passwd
 root
 admin
-gaiaworkforce
-gaiaworks
-gaia
 administrator
