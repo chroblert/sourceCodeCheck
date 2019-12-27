@@ -1,0 +1,7 @@
+username
+uname
+password
+passwd
+root
+admin
+administrator
